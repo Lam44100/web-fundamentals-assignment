@@ -1,0 +1,58 @@
+/* Custom Styles for specific effects */
+.hero-bg {
+    background-color: #111;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1579619626303-346e969d2d88?q=80&w=2070&auto=format&fit=crop');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+.hover-grow {
+    transition: transform 0.3s ease;
+}
+
+.hover-grow:hover {
+    transform: translateY(-5px);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #18181b;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #52525b;
+    border-radius: 5px;
+    border: 2px solid #18181b;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #C5A059;
+}
+
+/* Overlays Transition */
+.overlay-transition {
+    transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+}
+
+.hidden-overlay {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.visible-overlay {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+/* Focus styles for Accessibility */
+:focus-visible {
+    outline: 2px solid #C5A059;
+    outline-offset: 2px;
+}
