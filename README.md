@@ -57,6 +57,21 @@ If you have any questions, ask your group leader or refer to this README for gui
 
 ## Working with Git
 
+### How to Clone This Project from GitHub
+1. Open your terminal (PowerShell or Git Bash).
+2. Navigate to the folder where you want to place the project (e.g., your Desktop):
+    ```powershell
+    cd "pathToProjectDirectory"
+    ```
+3. Run the following command to clone the repository:
+    ```powershell
+    git clone https://github.com/Lam44100/web-fundamentals-assignment.git
+    ```
+4. Go into the project folder:
+    ```powershell
+    cd web-fundamentals-assignment/WebFundamental/templates
+    ```
+    
 ### How to Pull the Codebase
 1. Open your terminal (PowerShell or Git Bash).
 2. Navigate to your project directory:
