@@ -28,7 +28,7 @@ website/
 ## How to View the Websites Locally
 
 1. **Open the Project Folder**
-   - Navigate to the project directory in your file explorer: `WebFundamental/templates/`
+   - Navigate to the project directory in your file explorer
 
 2. **View Individual Cover Letters**
    - Open any group member's cover letter by double-clicking their `index.html` file:
@@ -61,7 +61,7 @@ If you have any questions, ask your group leader or refer to this README for gui
 1. Open your terminal (PowerShell or Git Bash).
 2. Navigate to your project directory:
   ```powershell
-  cd "C:\Users\User\Desktop\Workspace\#BNCS_Y1S3\WebFundamental\templates"
+  cd "pathToProjectDirectory"
   ```
 3. Pull the latest changes from the remote repository:
   ```powershell
