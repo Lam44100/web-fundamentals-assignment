@@ -1,101 +1,69 @@
-// Mobile Menu Toggle
+// Mobile Menu
 function toggleMenu() {
     const menu = document.getElementById('mobile-menu');
-    const btn = document.querySelector('button[onclick="toggleMenu()"]');
     menu.classList.toggle('hidden');
-    const isExpanded = menu.classList.contains('hidden') ? 'false' : 'true';
-    btn.setAttribute('aria-expanded', isExpanded);
 }
 
-// Dark Mode Toggle
+// Dark Mode
 function toggleTheme() {
     document.documentElement.classList.toggle('dark');
     const icon = document.getElementById('theme-icon');
-
-    if (document.documentElement.classList.contains('dark')) {
-        icon.classList.remove('fa-moon');
-        icon.classList.add('fa-sun');
-    } else {
-        icon.classList.remove('fa-sun');
-        icon.classList.add('fa-moon');
-    }
+    // Simple logic to switch SVG content could go here, 
+    // but for no-library simplicity, we just toggle the class.
+    // The CSS variables handle the color changes automatically.
 }
 
-// Search Overlay Toggle
+// Search Overlay
 function toggleSearch() {
     const overlay = document.getElementById('search-overlay');
     const input = document.getElementById('search-input');
 
-    if (overlay.classList.contains('hidden-overlay')) {
-        overlay.classList.remove('hidden-overlay');
-        overlay.classList.add('visible-overlay');
+    if (overlay.classList.contains('hidden')) {
+        overlay.classList.remove('hidden');
         setTimeout(() => input.focus(), 100);
     } else {
-        overlay.classList.remove('visible-overlay');
-        overlay.classList.add('hidden-overlay');
+        overlay.classList.add('hidden');
     }
 }
 
-// Auth Modal Toggle
+// Auth Modal
 function toggleAuth(tab = 'login') {
     const modal = document.getElementById('auth-modal');
-
-    if (modal.classList.contains('hidden-overlay')) {
-        modal.classList.remove('hidden-overlay');
-        modal.classList.add('visible-overlay');
+    if (modal.classList.contains('hidden')) {
+        modal.classList.remove('hidden');
         switchAuthTab(tab);
-        // Trap focus logic would ideally go here for full a11y compliance
     } else {
-        modal.classList.remove('visible-overlay');
-        modal.classList.add('hidden-overlay');
+        modal.classList.add('hidden');
     }
 }
 
-// Switch Auth Tabs
 function switchAuthTab(tabName) {
     const loginForm = document.getElementById('form-login');
     const signupForm = document.getElementById('form-signup');
     const loginTab = document.getElementById('tab-login');
     const signupTab = document.getElementById('tab-signup');
 
-    // Reset Styles & Aria
-    loginTab.classList.remove('text-brand-gold', 'border-brand-gold', 'bg-gray-50', 'dark:bg-brand-cardDark');
-    loginTab.classList.add('text-gray-600', 'dark:text-gray-400', 'border-transparent', 'bg-gray-100', 'dark:bg-black');
-    loginTab.setAttribute('aria-selected', 'false');
-
-    signupTab.classList.remove('text-brand-gold', 'border-brand-gold', 'bg-gray-50', 'dark:bg-brand-cardDark');
-    signupTab.classList.add('text-gray-600', 'dark:text-gray-400', 'border-transparent', 'bg-gray-100', 'dark:bg-black');
-    signupTab.setAttribute('aria-selected', 'false');
-
     if (tabName === 'login') {
         loginForm.classList.remove('hidden');
         signupForm.classList.add('hidden');
-
-        loginTab.classList.add('text-brand-gold', 'border-brand-gold', 'bg-gray-50', 'dark:bg-brand-cardDark');
-        loginTab.classList.remove('text-gray-600', 'dark:text-gray-400', 'border-transparent', 'bg-gray-100', 'dark:bg-black');
-        loginTab.setAttribute('aria-selected', 'true');
+        loginTab.classList.add('active');
+        signupTab.classList.remove('active');
     } else {
         loginForm.classList.add('hidden');
         signupForm.classList.remove('hidden');
-
-        signupTab.classList.add('text-brand-gold', 'border-brand-gold', 'bg-gray-50', 'dark:bg-brand-cardDark');
-        signupTab.classList.remove('text-gray-600', 'dark:text-gray-400', 'border-transparent', 'bg-gray-100', 'dark:bg-black');
-        signupTab.setAttribute('aria-selected', 'true');
+        signupTab.classList.add('active');
+        loginTab.classList.remove('active');
     }
 }
 
-// Handle Login/Signup Form Submit
 function handleAuth(event, title, message) {
     event.preventDefault();
     toggleAuth();
-    setTimeout(() => {
-        showToast(message, title);
-    }, 300);
+    showToast(message, title);
 }
 
-// Cart Logic Mockup
+// Cart Logic
 let cartItems = 0;
-
 function toggleCart() {
     if (cartItems === 0) {
         showToast("Your cart is currently empty.", "Cart Empty");
@@ -109,72 +77,57 @@ function addToCart(itemName) {
     const countEl = document.getElementById('cart-count');
     countEl.innerText = cartItems;
     countEl.classList.remove('hidden');
-
     showToast(`${itemName} has been added to your cart.`);
 }
 
-// Newsletter Handler
+// Newsletter
 function handleNewsletter(event) {
     event.preventDefault();
-    const emailInput = event.target.querySelector('input[type="email"]');
-
+    const emailInput = event.target.querySelector('input');
     if (emailInput.value) {
-        showToast("Thank you for subscribing to our inner circle!", "Welcome!");
+        showToast("Thank you for subscribing!", "Welcome!");
         emailInput.value = '';
     }
 }
 
-// Toast Notification System
+// Toast System
 let toastTimeout;
 function showToast(message, title = "Notification") {
     const toast = document.getElementById('toast');
-    const toastMsg = document.getElementById('toast-message');
-    const toastTitle = document.getElementById('toast-title');
+    document.getElementById('toast-message').innerText = message;
+    document.getElementById('toast-title').innerText = title;
 
-    toastMsg.innerText = message;
-    if (title) toastTitle.innerText = title;
-
-    toast.classList.remove('translate-y-24');
+    toast.classList.remove('hidden-toast');
 
     if (toastTimeout) clearTimeout(toastTimeout);
-
     toastTimeout = setTimeout(() => {
-        toast.classList.add('translate-y-24');
+        toast.classList.add('hidden-toast');
     }, 3000);
 }
 
-// Smooth Scroll Fix
+// Smooth Scroll (Native behavior)
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         const targetId = this.getAttribute('href');
         if (targetId === '#') return;
 
-        e.preventDefault();
-
         const targetElement = document.querySelector(targetId);
         if (targetElement) {
-            targetElement.scrollIntoView({
-                behavior: 'smooth'
-            });
-            const mobileMenu = document.getElementById('mobile-menu');
-            if (!mobileMenu.classList.contains('hidden')) {
+            e.preventDefault();
+            targetElement.scrollIntoView({ behavior: 'smooth' });
+
+            // Close mobile menu if open
+            if (!document.getElementById('mobile-menu').classList.contains('hidden')) {
                 toggleMenu();
             }
         }
     });
 });
 
-// Keyboard accessibility: Close modals on ESC key
+// Close Modals on Escape
 document.addEventListener('keydown', function (event) {
     if (event.key === "Escape") {
-        const authModal = document.getElementById('auth-modal');
-        const searchOverlay = document.getElementById('search-overlay');
-
-        if (!authModal.classList.contains('hidden-overlay')) {
-            toggleAuth();
-        }
-        if (!searchOverlay.classList.contains('hidden-overlay')) {
-            toggleSearch();
-        }
+        document.getElementById('auth-modal').classList.add('hidden');
+        document.getElementById('search-overlay').classList.add('hidden');
     }
 });
