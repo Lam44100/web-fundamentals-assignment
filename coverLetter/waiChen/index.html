@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,7 +13,7 @@
 
     <nav>
         <div class="container nav-inner">
-            <a href="index.html" class="logo">Famasi<span>.</span></a>
+            <a href="../../website/index.html" class="logo">Famasi<span>.</span></a>
 
             <div class="desktop-menu">
                 <a href="index.html">Home</a>
@@ -23,15 +24,32 @@
 
             <div class="nav-icons">
                 <button onclick="toggleResumeTheme()" class="icon-btn" aria-label="Toggle Theme">
-                    <svg id="moon-icon" class="icon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-                    <svg id="sun-icon" class="icon hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+                    <svg id="moon-icon" class="icon" viewBox="0 0 24 24">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+                    </svg>
+                    <svg id="sun-icon" class="icon hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
                 </button>
                 <button onclick="toggleMenu()" class="icon-btn mobile-toggle" aria-label="Menu">
-                    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+                    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg>
                 </button>
             </div>
         </div>
-        
+
         <div id="mobile-menu" class="hidden">
             <div class="mobile-links">
                 <a href="index.html">Home</a>
@@ -49,35 +67,54 @@
 
                 <div class="hero-text">
                     <h2 class="hero-subtitle">Computer Science Student</h2>
-                    <h1 class="hero-title">Lam Wai Chen<br><span>(Winston Lam)</span></h1>
+                    <h1 class="hero-title">Lam Wai Chen <span>(Winston Lam)</span></h1>
                     <p class="hero-desc">
-                        Passionate and enthusiastic entry-level professional with a solid foundation in computer systems and programming. Driven by a commitment to continuous improvement and the pursuit of excellence.
+                        Passionate and enthusiastic entry-level professional with a solid foundation in computer systems
+                        and programming. Driven by a commitment to continuous improvement and the pursuit of excellence.
                     </p>
 
                     <div class="contact-info">
                         <a href="mailto:lwaichen@gmail.com">
-                            <svg class="icon text-gold-icon" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                            <svg class="icon text-gold-icon" viewBox="0 0 24 24">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                                <polyline points="22,6 12,13 2,6" />
+                            </svg>
                             lwaichen@gmail.com
                         </a>
                         <span class="separator">•</span>
                         <a href="tel:+60134614932">
-                            <svg class="icon text-gold-icon" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                            <svg class="icon text-gold-icon" viewBox="0 0 24 24">
+                                <path
+                                    d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+                            </svg>
                             +60 13 461 4932
                         </a>
                         <span class="separator">•</span>
                         <span>
-                            <svg class="icon text-gold-icon" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                            <svg class="icon text-gold-icon" viewBox="0 0 24 24">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                                <circle cx="12" cy="10" r="3" />
+                            </svg>
                             Subang Jaya, Malaysia
                         </span>
                     </div>
 
                     <div class="social-buttons">
-                        <a href="https://www.linkedin.com/in/aaron-lam-sunwaycollege/" target="_blank" class="btn-social">
-                            <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+                        <a href="https://www.linkedin.com/in/aaron-lam-sunwaycollege/" target="_blank"
+                            class="btn-social">
+                            <svg viewBox="0 0 24 24">
+                                <path
+                                    d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+                                <rect x="2" y="9" width="4" height="12" />
+                                <circle cx="4" cy="4" r="2" />
+                            </svg>
                             LinkedIn
                         </a>
                         <a href="https://github.com/Lam44100" target="_blank" class="btn-social">
-                            <svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                            <svg viewBox="0 0 24 24">
+                                <path
+                                    d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
+                            </svg>
                             GitHub
                         </a>
                     </div>
@@ -99,9 +136,11 @@
                             <h3 class="job-title">IT System Specialist</h3>
                             <p class="company-meta">Gamuda Berhad | Apr 2025 - Aug 2025</p>
                             <ul class="job-desc">
-                                <li>Performed migration of 100+ devices from on-premises to cloud servers using unified endpoint management systems.</li>
+                                <li>Performed migration of 100+ devices from on-premises to cloud servers using unified
+                                    endpoint management systems.</li>
                                 <li>Managed and maintained ManageEngine Endpoint Central and Microsoft Intune.</li>
-                                <li>Operated ticketing systems to troubleshoot and resolve hardware/software issues.</li>
+                                <li>Operated ticketing systems to troubleshoot and resolve hardware/software issues.
+                                </li>
                                 <li>Assisted with data collection, analysis, and reporting using Microsoft Excel.</li>
                             </ul>
                         </div>
@@ -111,9 +150,11 @@
                             <h3 class="job-title">Flutter Developer</h3>
                             <p class="company-meta">Futuresmiths Sdn. Bhd. | Sept 2024 - Oct 2024</p>
                             <ul class="job-desc">
-                                <li>Gained solid foundation in Flutter framework and Dart for cross-platform app development.</li>
+                                <li>Gained solid foundation in Flutter framework and Dart for cross-platform app
+                                    development.</li>
                                 <li>Designed visually appealing interfaces enhancing user experience.</li>
-                                <li>Implemented REST API integration for dynamic data retrieval and synchronization.</li>
+                                <li>Implemented REST API integration for dynamic data retrieval and synchronization.
+                                </li>
                             </ul>
                         </div>
 
@@ -123,7 +164,8 @@
                             <p class="company-meta">Recogine Technology Sdn Bhd | Aug 2024 - Sept 2024</p>
                             <ul class="job-desc">
                                 <li>Acquired knowledge of Enterprise Asset Management (EAM) and ERP systems.</li>
-                                <li>Gained understanding of project execution: planning, coordination, and tracking.</li>
+                                <li>Gained understanding of project execution: planning, coordination, and tracking.
+                                </li>
                                 <li>Created comprehensive test cases to validate system functionality.</li>
                             </ul>
                         </div>
@@ -140,37 +182,46 @@
                         <article class="card">
                             <h3 class="card-title">Bitcoin Price Prediction</h3>
                             <p class="tech-stack">Python • Machine Learning • Streamlit</p>
-                            <p class="card-desc">Developed a prediction model using LSTM, ARIMA, and Random Forest to forecast market trends. Built a real-time interactive dashboard.</p>
+                            <p class="card-desc">Developed a prediction model using LSTM, ARIMA, and Random Forest to
+                                forecast market trends. Built a real-time interactive dashboard.</p>
                         </article>
 
                         <article class="card">
                             <h3 class="card-title">Weather Web App</h3>
                             <p class="tech-stack">Flask • Python • OpenWeatherMap API</p>
-                            <p class="card-desc">Fetches real-time weather data. Implemented a Flask-based backend and responsive frontend using Jinja templates.</p>
+                            <p class="card-desc">Fetches real-time weather data. Implemented a Flask-based backend and
+                                responsive frontend using Jinja templates.</p>
                         </article>
 
                         <article class="card">
                             <h3 class="card-title">Mortgage Calculator</h3>
                             <p class="tech-stack">Streamlit • Pandas • Financial Calc</p>
-                            <p class="card-desc">Interactive calculator for monthly payments and interest. Features real-time amortization schedule visualization.</p>
+                            <p class="card-desc">Interactive calculator for monthly payments and interest. Features
+                                real-time amortization schedule visualization.</p>
                         </article>
 
                         <article class="card">
                             <h3 class="card-title">Library Management System</h3>
                             <p class="tech-stack">Java • OOP • CLI</p>
-                            <p class="card-desc">Modular console application featuring Role-Based Access Control and custom data structures. Implemented complex loan logic and ANSI-colorized user interfaces.</p>
+                            <p class="card-desc">Modular console application featuring Role-Based Access Control and
+                                custom data structures. Implemented complex loan logic and ANSI-colorized user
+                                interfaces.</p>
                         </article>
 
                         <article class="card">
                             <h3 class="card-title">Smart Bin IoT System</h3>
                             <p class="tech-stack">Arduino • Laravel • React.js • CoAP</p>
-                            <p class="card-desc">End-to-end IoT solution bridging hardware sensors with a web dashboard. Optimized lightweight UDP communication for real-time fill level monitoring and alerts.</p>
+                            <p class="card-desc">End-to-end IoT solution bridging hardware sensors with a web dashboard.
+                                Optimized lightweight UDP communication for real-time fill level monitoring and alerts.
+                            </p>
                         </article>
 
                         <article class="card">
                             <h3 class="card-title">E-Commerce Brand Website</h3>
                             <p class="tech-stack">HTML5 • Tailwind CSS • JavaScript</p>
-                            <p class="card-desc">Responsive frontend clone of the Famasi Cues brand. Engineered a dark/light theme toggle, interactive authentication modals, and dynamic cart notifications.</p>
+                            <p class="card-desc">Responsive frontend clone of the Famasi Cues brand. Engineered a
+                                dark/light theme toggle, interactive authentication modals, and dynamic cart
+                                notifications.</p>
                         </article>
                     </div>
                 </section>
@@ -234,10 +285,18 @@
                     <div class="skill-group">
                         <h4 class="skill-header">Soft Skills (Click for Insight)</h4>
                         <div class="skill-tags">
-                            <button onclick="showToast('Reliable, focused on shared objectives and quality results.', 'Teamwork')" class="btn-tag">Teamwork</button>
-                            <button onclick="showToast('Committed to professional growth and learning new systems quickly.', 'Adaptability')" class="btn-tag">Continuous Improvement</button>
-                            <button onclick="showToast('Excellent verbal and written skills in 3 languages.', 'Communication')" class="btn-tag">Communication</button>
-                            <button onclick="showToast('Highly motivated to contribute and own task completion.', 'Initiative')" class="btn-tag">Initiative</button>
+                            <button
+                                onclick="showToast('Reliable, focused on shared objectives and quality results.', 'Teamwork')"
+                                class="btn-tag">Teamwork</button>
+                            <button
+                                onclick="showToast('Committed to professional growth and learning new systems quickly.', 'Adaptability')"
+                                class="btn-tag">Continuous Improvement</button>
+                            <button
+                                onclick="showToast('Excellent verbal and written skills in 3 languages.', 'Communication')"
+                                class="btn-tag">Communication</button>
+                            <button
+                                onclick="showToast('Highly motivated to contribute and own task completion.', 'Initiative')"
+                                class="btn-tag">Initiative</button>
                         </div>
                     </div>
                 </section>
@@ -248,22 +307,31 @@
                         <li class="lang-item">
                             <span>Mandarin</span>
                             <div style="display: flex; align-items: center; gap: 0.5rem;">
-                                <span style="font-size: 0.75rem; font-weight: bold; color: var(--color-gold); text-transform: uppercase;">Native</span>
-                                <div class="progress-bar"><div class="progress-fill" style="width: 100%;"></div></div>
+                                <span
+                                    style="font-size: 0.75rem; font-weight: bold; color: var(--color-gold); text-transform: uppercase;">Native</span>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 100%;"></div>
+                                </div>
                             </div>
                         </li>
                         <li class="lang-item">
                             <span>English</span>
                             <div style="display: flex; align-items: center; gap: 0.5rem;">
-                                <span style="font-size: 0.75rem; font-weight: bold; color: var(--color-gold); text-transform: uppercase;">Fluent</span>
-                                <div class="progress-bar"><div class="progress-fill" style="width: 85%;"></div></div>
+                                <span
+                                    style="font-size: 0.75rem; font-weight: bold; color: var(--color-gold); text-transform: uppercase;">Fluent</span>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 85%;"></div>
+                                </div>
                             </div>
                         </li>
                         <li class="lang-item">
                             <span>Malay</span>
                             <div style="display: flex; align-items: center; gap: 0.5rem;">
-                                <span style="font-size: 0.75rem; font-weight: bold; color: var(--color-gold); text-transform: uppercase;">Fluent</span>
-                                <div class="progress-bar"><div class="progress-fill" style="width: 85%;"></div></div>
+                                <span
+                                    style="font-size: 0.75rem; font-weight: bold; color: var(--color-gold); text-transform: uppercase;">Fluent</span>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 85%;"></div>
+                                </div>
                             </div>
                         </li>
                     </ul>
@@ -310,4 +378,5 @@
 
     <script src="script.js"></script>
 </body>
+
 </html>
