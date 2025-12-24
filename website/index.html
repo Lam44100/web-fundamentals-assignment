@@ -1,765 +1,495 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lucasi Cues | Performance & Style</title>
-
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-
-    <!-- FontAwesome for Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-    <!-- Google Fonts -->
-    <link
-        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap"
-        rel="stylesheet">
-
-    <!-- External CSS -->
+    <title>Famasi Cues | Performance & Style</title>
     <link rel="stylesheet" href="styles.css">
-
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: {
-                        brand: {
-                            gold: '#C5A059',
-                            goldHover: '#b08d4b', // Darker gold for hover states
-                            dark: '#09090b', // Zinc-950 for deeper black
-                            cardDark: '#18181b', // Zinc-900 for cards
-                            gray: '#27272a',
-                            light: '#f4f4f4'
-                        }
-                    },
-                    fontFamily: {
-                        sans: ['Montserrat', 'sans-serif'],
-                        serif: ['Playfair Display', 'serif'],
-                    },
-                    animation: {
-                        'fade-in-up': 'fadeInUp 1s ease-out forwards',
-                        'float': 'float 6s ease-in-out infinite',
-                    },
-                    keyframes: {
-                        fadeInUp: {
-                            '0%': { opacity: '0', transform: 'translateY(20px)' },
-                            '100%': { opacity: '1', transform: 'translateY(0)' },
-                        },
-                        float: {
-                            '0%, 100%': { transform: 'translateY(0)' },
-                            '50%': { transform: 'translateY(-20px)' },
-                        }
-                    }
-                }
-            }
-        }
-    </script>
 </head>
 
-<body
-    class="bg-white dark:bg-brand-dark text-gray-900 dark:text-gray-100 font-sans antialiased transition-colors duration-300 selection:bg-brand-gold selection:text-white">
+<body>
 
-    <!-- Auth Modal (Login/Signup) -->
-    <div id="auth-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title"
-        class="hidden-overlay overlay-transition fixed inset-0 bg-black/80 z-[70] flex items-center justify-center p-4 backdrop-blur-sm">
-        <div
-            class="bg-white dark:bg-brand-cardDark w-full max-w-md rounded-lg shadow-2xl overflow-hidden relative border border-gray-200 dark:border-gray-800 max-h-[90vh] overflow-y-auto">
-            <!-- Close Button -->
-            <button onclick="toggleAuth()" aria-label="Close Authentication Modal"
-                class="absolute top-4 right-4 text-gray-500 hover:text-red-600 dark:text-gray-400 dark:hover:text-red-400 transition p-2 rounded-full focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold z-10">
-                <i class="fas fa-times text-xl" aria-hidden="true"></i>
+    <div id="auth-modal" class="modal hidden" role="dialog" aria-modal="true">
+        <div class="modal-content">
+            <button onclick="toggleAuth()" class="close-btn" aria-label="Close Modal">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 6L6 18M6 6l12 12"></path>
+                </svg>
             </button>
 
-            <!-- Tabs -->
-            <div class="flex border-b border-gray-200 dark:border-gray-700 sticky top-0 bg-inherit z-0" role="tablist">
-                <button onclick="switchAuthTab('login')" id="tab-login" role="tab" aria-selected="true"
-                    aria-controls="form-login"
-                    class="flex-1 py-4 text-sm font-bold uppercase tracking-wider text-brand-gold border-b-2 border-brand-gold bg-gray-50 dark:bg-brand-cardDark transition-colors focus:outline-none">Login</button>
-                <button onclick="switchAuthTab('signup')" id="tab-signup" role="tab" aria-selected="false"
-                    aria-controls="form-signup"
-                    class="flex-1 py-4 text-sm font-bold uppercase tracking-wider text-gray-600 dark:text-gray-400 border-b-2 border-transparent hover:text-brand-gold bg-gray-100 dark:bg-black transition-colors focus:outline-none">Sign
-                    Up</button>
+            <div class="modal-tabs">
+                <button onclick="switchAuthTab('login')" id="tab-login" class="tab active">Login</button>
+                <button onclick="switchAuthTab('signup')" id="tab-signup" class="tab">Sign Up</button>
             </div>
 
-            <!-- Login Form -->
-            <div id="form-login" role="tabpanel" aria-labelledby="tab-login" class="p-6 sm:p-8">
-                <h3 id="modal-title" class="text-2xl font-serif font-bold mb-2 text-gray-900 dark:text-white">Welcome
-                    Back</h3>
-                <p class="text-sm text-gray-600 dark:text-gray-300 mb-6 font-medium">Enter your credentials to access
-                    your account.</p>
-                <form onsubmit="handleAuth(event, 'Login Successful', 'Welcome back to Lucasi!')">
-                    <div class="mb-4">
-                        <label for="login-email"
-                            class="block text-xs font-bold uppercase text-gray-700 dark:text-gray-300 mb-2">Email
-                            Address</label>
-                        <input type="email" id="login-email" required
-                            class="w-full px-4 py-3 bg-gray-50 dark:bg-black dark:text-white border border-gray-300 dark:border-gray-700 rounded focus:outline-none focus:border-brand-gold focus:ring-1 focus:ring-brand-gold transition-colors">
-                    </div>
-                    <div class="mb-6">
-                        <label for="login-password"
-                            class="block text-xs font-bold uppercase text-gray-700 dark:text-gray-300 mb-2">Password</label>
-                        <input type="password" id="login-password" required
-                            class="w-full px-4 py-3 bg-gray-50 dark:bg-black dark:text-white border border-gray-300 dark:border-gray-700 rounded focus:outline-none focus:border-brand-gold focus:ring-1 focus:ring-brand-gold transition-colors">
-                    </div>
-                    <button type="submit"
-                        class="w-full bg-brand-gold text-white dark:text-black font-bold py-3 uppercase tracking-wide hover:bg-brand-goldHover hover:text-white dark:hover:bg-white transition duration-300 rounded shadow-md">Login</button>
-                    <button type="button"
-                        class="w-full text-center mt-4 text-xs text-gray-500 dark:text-gray-400 hover:text-brand-gold dark:hover:text-brand-gold cursor-pointer underline-offset-4 hover:underline focus:outline-none focus-visible:text-brand-gold">Forgot
-                        Password?</button>
+            <div id="form-login" class="auth-form">
+                <h3>Welcome Back</h3>
+                <p>Enter your credentials to access your account.</p>
+                <form onsubmit="handleAuth(event, 'Login Successful', 'Welcome back to Famasi!')">
+                    <label for="login-email">Email Address</label>
+                    <input type="email" id="login-email" required>
+
+                    <label for="login-password">Password</label>
+                    <input type="password" id="login-password" required>
+
+                    <button type="submit" class="btn btn-primary full-width">Login</button>
+                    <button type="button" class="btn-text">Forgot Password?</button>
                 </form>
             </div>
 
-            <!-- Sign Up Form (Hidden by default) -->
-            <div id="form-signup" role="tabpanel" aria-labelledby="tab-signup" class="p-6 sm:p-8 hidden">
-                <h3 class="text-2xl font-serif font-bold mb-2 text-gray-900 dark:text-white">Join the Family</h3>
-                <p class="text-sm text-gray-600 dark:text-gray-300 mb-6 font-medium">Create an account to track orders
-                    and get rewards.</p>
-                <form onsubmit="handleAuth(event, 'Account Created', 'Thank you for registering with Lucasi!')">
-                    <div class="mb-4">
-                        <label for="signup-name"
-                            class="block text-xs font-bold uppercase text-gray-700 dark:text-gray-300 mb-2">Full
-                            Name</label>
-                        <input type="text" id="signup-name" required
-                            class="w-full px-4 py-3 bg-gray-50 dark:bg-black dark:text-white border border-gray-300 dark:border-gray-700 rounded focus:outline-none focus:border-brand-gold focus:ring-1 focus:ring-brand-gold transition-colors">
-                    </div>
-                    <div class="mb-4">
-                        <label for="signup-email"
-                            class="block text-xs font-bold uppercase text-gray-700 dark:text-gray-300 mb-2">Email
-                            Address</label>
-                        <input type="email" id="signup-email" required
-                            class="w-full px-4 py-3 bg-gray-50 dark:bg-black dark:text-white border border-gray-300 dark:border-gray-700 rounded focus:outline-none focus:border-brand-gold focus:ring-1 focus:ring-brand-gold transition-colors">
-                    </div>
-                    <div class="mb-6">
-                        <label for="signup-password"
-                            class="block text-xs font-bold uppercase text-gray-700 dark:text-gray-300 mb-2">Password</label>
-                        <input type="password" id="signup-password" required
-                            class="w-full px-4 py-3 bg-gray-50 dark:bg-black dark:text-white border border-gray-300 dark:border-gray-700 rounded focus:outline-none focus:border-brand-gold focus:ring-1 focus:ring-brand-gold transition-colors">
-                    </div>
-                    <button type="submit"
-                        class="w-full bg-black text-white dark:bg-white dark:text-black font-bold py-3 uppercase tracking-wide hover:bg-brand-gold hover:text-brand-dark dark:hover:bg-brand-gold transition duration-300 rounded shadow-md">Create
-                        Account</button>
+            <div id="form-signup" class="auth-form hidden">
+                <h3>Join the Family</h3>
+                <p>Create an account to track orders and get rewards.</p>
+                <form onsubmit="handleAuth(event, 'Account Created', 'Thank you for registering!')">
+                    <label for="signup-name">Full Name</label>
+                    <input type="text" id="signup-name" required>
+
+                    <label for="signup-email">Email Address</label>
+                    <input type="email" id="signup-email" required>
+
+                    <label for="signup-password">Password</label>
+                    <input type="password" id="signup-password" required>
+
+                    <button type="submit" class="btn btn-primary full-width">Create Account</button>
                 </form>
             </div>
         </div>
     </div>
 
-    <!-- Search Overlay -->
-    <div id="search-overlay" role="dialog" aria-modal="true" aria-label="Search Site"
-        class="hidden-overlay overlay-transition fixed inset-0 bg-brand-dark/95 z-[60] flex items-center justify-center p-6 backdrop-blur-sm">
-        <button onclick="toggleSearch()" aria-label="Close Search"
-            class="absolute top-8 right-8 text-white text-4xl hover:text-brand-gold transition p-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold rounded">
-            <i class="fas fa-times" aria-hidden="true"></i>
-        </button>
-        <div class="w-full max-w-3xl text-center">
-            <h2 class="text-white text-3xl font-serif mb-8">Search Lucasi</h2>
-            <div class="relative border-b-2 border-brand-gold pb-2">
-                <label for="search-input" class="sr-only">Search Query</label>
-                <input type="text" id="search-input" placeholder="What are you looking for?"
-                    class="w-full bg-transparent text-white text-3xl py-2 outline-none placeholder-gray-500 font-serif focus:placeholder-gray-400">
-                <button aria-label="Submit Search"
-                    class="absolute right-0 top-1/2 transform -translate-y-1/2 text-brand-gold text-2xl p-2 hover:text-white transition">
-                    <i class="fas fa-search" aria-hidden="true"></i>
+    <div id="search-overlay" class="overlay hidden" role="dialog">
+        <button onclick="toggleSearch()" class="close-btn-large" aria-label="Close Search">&times;</button>
+        <div class="search-container">
+            <h2>Search Famasi</h2>
+            <div class="search-bar">
+                <input type="text" id="search-input" placeholder="What are you looking for?">
+                <button class="search-submit">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
                 </button>
             </div>
-            <p class="text-gray-400 mt-6 text-sm font-medium">Popular:
-                <button
-                    class="text-brand-gold hover:text-white hover:underline mx-1 focus:outline-none focus-visible:ring-1 focus-visible:ring-brand-gold rounded px-1">Hybrid</button>,
-                <button
-                    class="text-brand-gold hover:text-white hover:underline mx-1 focus:outline-none focus-visible:ring-1 focus-visible:ring-brand-gold rounded px-1">Carbon
-                    Fiber</button>,
-                <button
-                    class="text-brand-gold hover:text-white hover:underline mx-1 focus:outline-none focus-visible:ring-1 focus-visible:ring-brand-gold rounded px-1">Jump
-                    Cues</button>
-            </p>
         </div>
     </div>
 
-    <!-- Skip Link for Accessibility -->
-    <a href="#main-content"
-        class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-brand-gold text-black font-bold px-4 py-2 rounded z-[100]">Skip
-        to main content</a>
-
-    <!-- Top Bar -->
-    <div class="bg-brand-dark text-gray-300 text-xs py-2 border-b border-gray-800 transition-colors duration-300">
-        <div class="container mx-auto px-6 flex justify-between items-center">
-            <p class="font-medium tracking-wide">Free Shipping on Orders Over $100</p>
-            <nav aria-label="Top Bar Navigation" class="space-x-4">
-                <a href="#"
-                    class="hover:text-brand-gold transition focus:outline-none focus-visible:text-brand-gold">Dealer
-                    Locator</a>
-                <a href="#"
-                    class="hover:text-brand-gold transition focus:outline-none focus-visible:text-brand-gold">Support</a>
-                <a href="#" onclick="toggleAuth('login')" role="button"
-                    class="hover:text-brand-gold transition cursor-pointer font-semibold focus:outline-none focus-visible:text-brand-gold">Login
-                    / Register</a>
+    <div class="top-bar">
+        <div class="container flex-between">
+            <p>Free Shipping on Orders Over $100</p>
+            <nav class="top-nav">
+                <a href="#">Dealer Locator</a>
+                <a href="#">Support</a>
+                <a href="#" onclick="toggleAuth('login')">Login / Register</a>
             </nav>
         </div>
     </div>
 
-    <!-- Navigation -->
-    <nav class="bg-brand-dark sticky top-0 z-50 shadow-lg border-b border-gray-800 transition-colors duration-300">
-        <div class="container mx-auto px-6 py-4">
-            <div class="flex justify-between items-center">
-                <!-- Logo -->
-                <a href="#" onclick="window.scrollTo({ top: 0, behavior: 'smooth' }); return false;"
-                    aria-label="Lucasi Cues Home"
-                    class="text-2xl font-serif font-bold text-white tracking-widest uppercase cursor-pointer hover:opacity-80 transition group focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold rounded px-2">
-                    Lucasi<span class="text-brand-gold group-hover:text-white transition">.</span>
-                </a>
+    <nav class="main-nav">
+        <div class="container flex-between">
+            <a href="#" class="logo">Famasi<span>.</span></a>
 
-                <!-- Desktop Menu -->
-                <div class="hidden md:flex items-center space-x-8 text-sm font-bold tracking-wide text-white uppercase">
-                    <a href="#cues"
-                        class="hover:text-brand-gold transition duration-300 py-2 border-b-2 border-transparent hover:border-brand-gold focus:outline-none focus-visible:text-brand-gold">Cues</a>
-                    <a href="#shafts"
-                        class="hover:text-brand-gold transition duration-300 py-2 border-b-2 border-transparent hover:border-brand-gold focus:outline-none focus-visible:text-brand-gold">Shafts</a>
-                    <a href="#cases"
-                        class="hover:text-brand-gold transition duration-300 py-2 border-b-2 border-transparent hover:border-brand-gold focus:outline-none focus-visible:text-brand-gold">Cases</a>
-                    <a href="#technology"
-                        class="hover:text-brand-gold transition duration-300 py-2 border-b-2 border-transparent hover:border-brand-gold focus:outline-none focus-visible:text-brand-gold">Technology</a>
-                    <a href="#custom"
-                        class="hover:text-brand-gold transition duration-300 py-2 border-b-2 border-transparent hover:border-brand-gold focus:outline-none focus-visible:text-brand-gold">Custom</a>
-                </div>
+            <div class="desktop-menu">
+                <a href="#cues">Cues</a>
+                <a href="#shafts">Shafts</a>
+                <a href="#cases">Cases</a>
+                <a href="#technology">Technology</a>
+                <a href="#custom">Custom</a>
+                <a href="#team" style="color: var(--color-gold);">Team</a>
+            </div>
 
-                <!-- Icons -->
-                <div class="flex items-center space-x-5 text-white">
-                    <button onclick="toggleTheme()" aria-label="Toggle Dark/Light Mode"
-                        class="hover:text-brand-gold transition transform hover:rotate-12 p-2 rounded focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold">
-                        <i id="theme-icon" class="fas fa-moon" aria-hidden="true"></i>
-                    </button>
-                    <button onclick="toggleSearch()" aria-label="Open Search"
-                        class="hover:text-brand-gold transition p-2 rounded focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold"><i
-                            class="fas fa-search" aria-hidden="true"></i></button>
-                    <button onclick="toggleCart()" aria-label="View Cart"
-                        class="relative hover:text-brand-gold transition p-2 rounded focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold">
-                        <i class="fas fa-shopping-bag" aria-hidden="true"></i>
-                        <span id="cart-count"
-                            class="absolute -top-1 -right-1 bg-brand-gold text-brand-dark text-[10px] font-bold px-1.5 py-0.5 rounded-full hidden"
-                            aria-live="polite">0</span>
-                    </button>
-                    <!-- Mobile Menu Button -->
-                    <button onclick="toggleMenu()" aria-label="Toggle Mobile Menu" aria-expanded="false"
-                        class="md:hidden hover:text-brand-gold transition p-2 rounded focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold">
-                        <i class="fas fa-bars" aria-hidden="true"></i>
-                    </button>
-                </div>
+            <div class="nav-icons">
+                <button onclick="toggleTheme()" aria-label="Toggle Theme">
+                    <svg id="theme-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                </button>
+                <button onclick="toggleSearch()" aria-label="Search">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                </button>
+                <button onclick="toggleCart()" class="cart-btn" aria-label="Cart">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <path d="M16 10a4 4 0 0 1-8 0"></path>
+                    </svg>
+                    <span id="cart-count" class="badge hidden">0</span>
+                </button>
+                <button onclick="toggleMenu()" class="mobile-toggle" aria-label="Menu">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg>
+                </button>
             </div>
         </div>
 
-        <!-- Mobile Menu (Hidden by default) -->
-        <div id="mobile-menu" class="hidden md:hidden bg-zinc-900 border-t border-zinc-800">
-            <div class="flex flex-col p-6 space-y-4 text-white text-sm font-bold uppercase">
-                <a href="#cues" class="hover:text-brand-gold py-2">Cues</a>
-                <a href="#shafts" class="hover:text-brand-gold py-2">Shafts</a>
-                <a href="#cases" class="hover:text-brand-gold py-2">Cases</a>
-                <a href="#technology" class="hover:text-brand-gold py-2">Technology</a>
-                <a href="#custom" class="hover:text-brand-gold py-2">Custom</a>
-                <button onclick="toggleAuth('login')" class="text-brand-gold text-left py-2 font-bold uppercase">Login /
-                    Register</button>
-            </div>
+        <div id="mobile-menu" class="mobile-menu hidden">
+            <a href="#cues">Cues</a>
+            <a href="#shafts">Shafts</a>
+            <a href="#cases">Cases</a>
+            <a href="#technology">Technology</a>
+            <a href="#custom">Custom</a>
+            <a href="#team" class="text-gold">Meet the Team</a>
+            <button onclick="toggleAuth('login')">Login / Register</button>
         </div>
     </nav>
 
-    <main id="main-content">
-        <!-- Hero Section -->
-        <header class="hero-bg h-[600px] flex items-center justify-center text-center px-6 relative" role="banner">
-            <div class="max-w-3xl relative z-10">
-                <h2 class="text-brand-gold text-sm font-bold tracking-[0.3em] mb-4 uppercase animate-fade-in-up"
-                    style="animation-delay: 0.1s;">The New Standard</h2>
-                <h1 class="text-5xl md:text-7xl font-serif font-bold text-white mb-6 leading-tight animate-fade-in-up drop-shadow-lg"
-                    style="animation-delay: 0.3s;">
-                    Precision Meets <br> <span class="text-gray-300 italic">Perfection</span>
-                </h1>
-                <p class="text-gray-200 mb-10 text-lg font-medium max-w-xl mx-auto animate-fade-in-up drop-shadow-md"
-                    style="animation-delay: 0.5s;">
-                    Engineered for accuracy, designed for style. Experience the Zero Flexpoint technology that changed
-                    the game.
-                </p>
-                <div class="flex justify-center gap-4 animate-fade-in-up" style="animation-delay: 0.7s;">
-                    <a href="#cues"
-                        class="bg-brand-gold text-brand-dark px-8 py-3 font-bold text-sm uppercase tracking-wider hover:bg-brand-goldHover hover:text-white hover:scale-105 transition duration-300 shadow-lg rounded focus:outline-none focus-visible:ring-2 focus-visible:ring-white">Shop
-                        Cues</a>
-                    <a href="#technology"
-                        class="bg-black/40 backdrop-blur-sm border border-white text-white px-8 py-3 font-bold text-sm uppercase tracking-wider hover:bg-white hover:text-brand-dark hover:scale-105 transition duration-300 rounded focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold">Learn
-                        More</a>
+    <main>
+        <header class="hero">
+            <div class="hero-content">
+                <h2 class="subtitle">The New Standard</h2>
+                <h1 class="title">Precision Meets <br> <span>Perfection</span></h1>
+                <p>Engineered for accuracy, designed for style. Experience the Zero Flexpoint technology that changed
+                    the game.</p>
+                <div class="hero-buttons">
+                    <a href="#cues" class="btn btn-primary">Shop Cues</a>
+                    <a href="#technology" class="btn btn-outline">Learn More</a>
                 </div>
             </div>
         </header>
 
-        <!-- CUES Section -->
-        <section id="cues" class="bg-gray-50 dark:bg-brand-dark py-20 scroll-mt-20 transition-colors duration-300"
-            aria-label="Featured Cues">
-            <div class="container mx-auto px-6">
-                <div class="flex justify-between items-end mb-12">
+        <section id="cues" class="section">
+            <div class="container">
+                <div class="section-header">
                     <div>
-                        <h2 class="text-3xl font-serif font-bold text-gray-900 dark:text-white">Performance Cues</h2>
-                        <div class="h-1 w-20 bg-brand-gold mt-2 rounded"></div>
+                        <h2>Performance Cues</h2>
+                        <div class="divider"></div>
                     </div>
-                    <a href="#"
-                        class="hidden md:block text-sm font-bold uppercase tracking-wide text-brand-gold hover:text-brand-goldHover dark:hover:text-white transition focus:outline-none focus-visible:text-brand-goldHover">View
-                        All Cues <i class="fas fa-arrow-right ml-2" aria-hidden="true"></i></a>
+                    <a href="#" class="view-all">View All Cues &rarr;</a>
                 </div>
 
-                <!-- Grid -->
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-                    <!-- Product 1 -->
-                    <article
-                        class="bg-white dark:bg-brand-cardDark rounded-lg overflow-hidden group hover-grow shadow-md hover:shadow-xl transition duration-300 border border-gray-100 dark:border-gray-800">
-                        <div
-                            class="relative h-80 bg-gray-200 dark:bg-zinc-800 overflow-hidden flex items-center justify-center">
-                            <img src="https://images.unsplash.com/photo-1589578508736-6e54f4790103?q=80&w=1000&auto=format&fit=crop"
-                                alt="Lucasi Custom LZC29 Cue Stick"
-                                class="h-full w-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-105 transition duration-500">
-                            <span
-                                class="absolute top-4 left-4 bg-brand-dark text-white text-xs font-bold px-2 py-1 uppercase tracking-wider rounded">Best
-                                Seller</span>
-                            <div
-                                class="absolute bottom-4 left-0 right-0 flex justify-center space-x-2 opacity-0 group-hover:opacity-100 transition duration-300 translate-y-4 group-hover:translate-y-0 focus-within:opacity-100 focus-within:translate-y-0">
-                                <button onclick="addToCart('Lucasi Custom LZC29')"
-                                    aria-label="Add Lucasi Custom LZC29 to Cart"
-                                    class="bg-brand-gold text-white p-3 rounded-full hover:bg-black transition shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-white"><i
-                                        class="fas fa-cart-plus" aria-hidden="true"></i></button>
-                                <button aria-label="View Details for Lucasi Custom LZC29"
-                                    class="bg-white text-black p-3 rounded-full hover:bg-black hover:text-white transition shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold"><i
-                                        class="fas fa-eye" aria-hidden="true"></i></button>
+                <div class="grid-4">
+                    <article class="product-card">
+                        <div class="product-image placeholder-bg-2">
+                            <div class="cue-visual cue-visual-4"></div>
+                            <span class="tag">Best Seller</span>
+                            <div class="product-actions">
+                                <button onclick="addToCart('Famasi Custom LZC29')">Add</button>
                             </div>
                         </div>
-                        <div class="p-6 text-center">
-                            <h3 class="font-bold text-gray-900 dark:text-gray-100 mb-1 text-lg">Lucasi Custom LZC29</h3>
-                            <p class="text-sm text-gray-600 dark:text-gray-400 mb-3 font-medium">Mystic Black & Curly
-                                Maple</p>
-                            <p class="text-brand-gold font-bold text-xl">$439.99</p>
+                        <div class="product-info">
+                            <h3>Famasi Custom LZC29</h3>
+                            <p>Mystic Black & Curly Maple</p>
+                            <p class="price">$439.99</p>
                         </div>
                     </article>
 
-                    <!-- Product 2 -->
-                    <article
-                        class="bg-white dark:bg-brand-cardDark rounded-lg overflow-hidden group hover-grow shadow-md hover:shadow-xl transition duration-300 border border-gray-100 dark:border-gray-800">
-                        <div
-                            class="relative h-80 bg-gray-200 dark:bg-zinc-800 overflow-hidden flex items-center justify-center">
-                            <div
-                                class="h-full w-full bg-gradient-to-t from-gray-700 to-gray-500 dark:from-zinc-900 dark:to-zinc-800 flex items-center justify-center">
-                                <div
-                                    class="w-3 h-64 bg-amber-700 rounded-full shadow-lg relative transform rotate-12 border-l border-amber-800">
-                                    <div class="absolute top-0 w-full h-10 bg-white"></div>
-                                    <div class="absolute bottom-10 w-full h-20 bg-black"></div>
-                                </div>
-                            </div>
-                            <div
-                                class="absolute bottom-4 left-0 right-0 flex justify-center space-x-2 opacity-0 group-hover:opacity-100 transition duration-300 translate-y-4 group-hover:translate-y-0 focus-within:opacity-100 focus-within:translate-y-0">
-                                <button onclick="addToCart('Lucasi Hybrid L-H10')"
-                                    aria-label="Add Lucasi Hybrid to Cart"
-                                    class="bg-brand-gold text-white p-3 rounded-full hover:bg-black transition shadow-lg"><i
-                                        class="fas fa-cart-plus" aria-hidden="true"></i></button>
-                                <button aria-label="View Details"
-                                    class="bg-white text-black p-3 rounded-full hover:bg-black hover:text-white transition shadow-lg"><i
-                                        class="fas fa-eye" aria-hidden="true"></i></button>
+                    <article class="product-card">
+                        <div class="product-image placeholder-bg-1">
+                            <div class="cue-visual cue-visual-1"></div>
+                            <div class="product-actions">
+                                <button onclick="addToCart('Famasi Hybrid L-H10')">Add</button>
                             </div>
                         </div>
-                        <div class="p-6 text-center">
-                            <h3 class="font-bold text-gray-900 dark:text-gray-100 mb-1 text-lg">Lucasi Hybrid L-H10</h3>
-                            <p class="text-sm text-gray-600 dark:text-gray-400 mb-3 font-medium">Original Hybrid
-                                Technology</p>
-                            <p class="text-brand-gold font-bold text-xl">$565.00</p>
+                        <div class="product-info">
+                            <h3>Famasi Hybrid L-H10</h3>
+                            <p>Original Hybrid Technology</p>
+                            <p class="price">$565.00</p>
                         </div>
                     </article>
 
-                    <!-- Product 3 -->
-                    <article
-                        class="bg-white dark:bg-brand-cardDark rounded-lg overflow-hidden group hover-grow shadow-md hover:shadow-xl transition duration-300 border border-gray-100 dark:border-gray-800">
-                        <div
-                            class="relative h-80 bg-gray-200 dark:bg-zinc-800 overflow-hidden flex items-center justify-center">
-                            <div
-                                class="h-full w-full bg-gradient-to-t from-gray-800 to-gray-600 dark:from-black dark:to-zinc-800 flex items-center justify-center">
-                                <div
-                                    class="w-3 h-64 bg-amber-900 rounded-full shadow-lg relative transform -rotate-6 border-r border-amber-950">
-                                    <div class="absolute top-0 w-full h-8 bg-gray-200"></div>
-                                    <div class="absolute top-20 w-full h-2 bg-white"></div>
-                                </div>
-                            </div>
-                            <span
-                                class="absolute top-4 left-4 bg-red-600 text-white text-xs font-bold px-2 py-1 uppercase tracking-wider rounded">Sale</span>
-                            <div
-                                class="absolute bottom-4 left-0 right-0 flex justify-center space-x-2 opacity-0 group-hover:opacity-100 transition duration-300 translate-y-4 group-hover:translate-y-0 focus-within:opacity-100 focus-within:translate-y-0">
-                                <button onclick="addToCart('Lucasi Luxe LX-55')" aria-label="Add Luxe LX-55 to Cart"
-                                    class="bg-brand-gold text-white p-3 rounded-full hover:bg-black transition shadow-lg"><i
-                                        class="fas fa-cart-plus" aria-hidden="true"></i></button>
-                                <button aria-label="View Details"
-                                    class="bg-white text-black p-3 rounded-full hover:bg-black hover:text-white transition shadow-lg"><i
-                                        class="fas fa-eye" aria-hidden="true"></i></button>
+                    <article class="product-card">
+                        <div class="product-image placeholder-bg-2">
+                            <div class="cue-visual cue-visual-3"></div>
+                            <span class="tag tag-sale">Sale</span>
+                            <div class="product-actions">
+                                <button onclick="addToCart('Famasi Luxe LX-55')">Add</button>
                             </div>
                         </div>
-                        <div class="p-6 text-center">
-                            <h3 class="font-bold text-gray-900 dark:text-gray-100 mb-1 text-lg">Lucasi Luxe LX-55</h3>
-                            <p class="text-sm text-gray-600 dark:text-gray-400 mb-3 font-medium">Exotic Cocobolo Design
-                            </p>
-                            <div class="flex justify-center gap-2 items-baseline">
-                                <p class="text-gray-500 line-through text-sm">$650.00</p>
-                                <p class="text-brand-gold font-bold text-xl">$599.99</p>
+                        <div class="product-info">
+                            <h3>Famasi Luxe LX-55</h3>
+                            <p>Exotic Cocobolo Design</p>
+                            <div class="price-wrapper">
+                                <span class="old-price">$650.00</span>
+                                <span class="price">$599.99</span>
                             </div>
                         </div>
                     </article>
 
-                    <!-- Product 4 -->
-                    <article
-                        class="bg-white dark:bg-brand-cardDark rounded-lg overflow-hidden group hover-grow shadow-md hover:shadow-xl transition duration-300 border border-gray-100 dark:border-gray-800">
-                        <div
-                            class="relative h-80 bg-gray-200 dark:bg-zinc-800 overflow-hidden flex items-center justify-center">
-                            <div
-                                class="h-full w-full bg-gradient-to-t from-gray-700 to-gray-500 dark:from-zinc-900 dark:to-zinc-800 flex items-center justify-center">
-                                <div
-                                    class="w-3 h-64 bg-blue-900 rounded-full shadow-lg relative transform rotate-3 border-l border-blue-950">
-                                    <div class="absolute bottom-0 w-full h-24 bg-black"></div>
-                                    <div class="absolute top-10 w-full h-1 bg-brand-gold"></div>
-                                </div>
-                            </div>
-                            <div
-                                class="absolute bottom-4 left-0 right-0 flex justify-center space-x-2 opacity-0 group-hover:opacity-100 transition duration-300 translate-y-4 group-hover:translate-y-0 focus-within:opacity-100 focus-within:translate-y-0">
-                                <button onclick="addToCart('Lucasi Air Jump')" aria-label="Add Air Jump to Cart"
-                                    class="bg-brand-gold text-white p-3 rounded-full hover:bg-black transition shadow-lg"><i
-                                        class="fas fa-cart-plus" aria-hidden="true"></i></button>
-                                <button aria-label="View Details"
-                                    class="bg-white text-black p-3 rounded-full hover:bg-black hover:text-white transition shadow-lg"><i
-                                        class="fas fa-eye" aria-hidden="true"></i></button>
+                    <article class="product-card">
+                        <div class="product-image placeholder-bg-1">
+                            <div class="cue-visual cue-visual-2"></div>
+                            <div class="product-actions">
+                                <button onclick="addToCart('Famasi Air Jump')">Add</button>
                             </div>
                         </div>
-                        <div class="p-6 text-center">
-                            <h3 class="font-bold text-gray-900 dark:text-gray-100 mb-1 text-lg">Lucasi Air Jump</h3>
-                            <p class="text-sm text-gray-600 dark:text-gray-400 mb-3 font-medium">Specialty Jump Cue</p>
-                            <p class="text-brand-gold font-bold text-xl">$199.99</p>
+                        <div class="product-info">
+                            <h3>Famasi Air Jump</h3>
+                            <p>Specialty Jump Cue</p>
+                            <p class="price">$199.99</p>
                         </div>
                     </article>
-
                 </div>
             </div>
         </section>
 
-        <!-- SHAFTS Section -->
-        <section id="shafts"
-            class="bg-brand-dark text-white py-24 scroll-mt-20 border-t border-gray-800 relative overflow-hidden">
-            <!-- Subtle Texture Background -->
-            <div
-                class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/dark-matter.png')] opacity-30">
-            </div>
+        <section id="shafts" class="section dark-section relative-section">
+            <div class="bg-texture"></div>
 
-            <div class="container mx-auto px-6 relative z-10">
-                <div class="flex flex-col md:flex-row items-center gap-16">
-                    <div class="md:w-1/2 text-left">
-                        <h2 class="text-4xl font-serif font-bold mb-4 text-white">Zero Flexpoint® Shafts</h2>
-                        <div class="h-1.5 w-24 bg-brand-gold mb-8 rounded"></div>
-                        <p class="text-gray-300 mb-8 leading-relaxed text-lg">
-                            Upgrade your game with the shaft technology that revolutionized pool. The Zero Flexpoint®
-                            shaft gives you dead-on accuracy by drastically reducing deflection through special polymer
-                            construction and a lightweight core.
-                        </p>
-                        <ul class="space-y-4 mb-10 text-base font-medium text-gray-200">
-                            <li class="flex items-center"><i class="fas fa-check-circle text-brand-gold mr-3 text-xl"
-                                    aria-hidden="true"></i> 12.75mm Professional Taper</li>
-                            <li class="flex items-center"><i class="fas fa-check-circle text-brand-gold mr-3 text-xl"
-                                    aria-hidden="true"></i> Total Sweet Spot Construction</li>
-                            <li class="flex items-center"><i class="fas fa-check-circle text-brand-gold mr-3 text-xl"
-                                    aria-hidden="true"></i> Premium Everest Tip</li>
-                        </ul>
-                        <button
-                            class="bg-brand-gold text-brand-dark px-10 py-4 font-bold text-sm uppercase tracking-wider hover:bg-white transition duration-300 rounded shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-white">
-                            Shop Shafts
-                        </button>
-                    </div>
-                    <div class="w-full md:w-1/2 flex justify-center">
-                        <!-- Abstract representation of a shaft -->
-                        <div
-                            class="relative w-full h-80 bg-zinc-900 rounded-xl overflow-hidden shadow-2xl flex items-center justify-center group cursor-pointer hover:scale-105 transition-transform duration-500 border border-zinc-800">
-                            <div class="absolute inset-0 bg-black opacity-40"></div>
-                            <div
-                                class="w-3/4 h-5 bg-amber-100 rounded shadow-2xl transform rotate-[-5deg] relative z-10 border border-amber-200">
-                                <div
-                                    class="absolute right-0 top-0 bottom-0 w-5 bg-blue-300 rounded-r border-l border-blue-400">
-                                </div> <!-- Tip -->
-                                <div
-                                    class="absolute left-0 top-0 bottom-0 w-24 bg-black rounded-l opacity-95 flex items-center justify-center">
-                                    <span class="text-[8px] text-gray-500 font-mono tracking-widest">LUCASI</span>
-                                </div> <!-- Joint -->
-                            </div>
-                            <div class="absolute bottom-6 left-6 text-white z-20">
-                                <h3 class="font-bold text-2xl">Solid Core Low Deflection</h3>
-                                <p class="text-brand-gold font-bold text-lg mt-1">$249.99</p>
-                            </div>
-                            <div
-                                class="absolute top-6 right-6 bg-brand-gold text-brand-dark px-4 py-1.5 text-xs font-bold uppercase rounded shadow">
-                                Top Pick</div>
+            <div class="container flex-row" style="position: relative; z-index: 10;">
+                <div class="text-block">
+                    <h2>Zero Flexpoint® Shafts</h2>
+                    <div class="divider"></div>
+                    <p>Upgrade your game with the shaft technology that revolutionized pool. Drastically reduces
+                        deflection.</p>
+                    <ul class="feature-list">
+                        <li>&#10003; 12.75mm Professional Taper</li>
+                        <li>&#10003; Total Sweet Spot Construction</li>
+                        <li>&#10003; Premium Everest Tip</li>
+                    </ul>
+                    <button class="btn btn-primary">Shop Shafts</button>
+                </div>
+                <div class="image-block">
+                    <div class="shaft-display">
+                        <div class="shaft-stick">
+                            <div class="shaft-tip"></div>
+                            <div class="shaft-logo">FAMASI</div>
+                        </div>
+                        <div class="shaft-details">
+                            <h3>Solid Core Low Deflection</h3>
+                            <p class="price">$249.99</p>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- CASES Section -->
-        <section id="cases" class="bg-white dark:bg-brand-dark py-20 scroll-mt-20 transition-colors duration-300">
-            <div class="container mx-auto px-6">
-                <div class="text-center mb-16">
-                    <h2 class="text-3xl font-serif font-bold text-gray-900 dark:text-white">Protection & Style</h2>
-                    <div class="h-1 w-20 bg-brand-gold mt-2 mx-auto rounded"></div>
-                    <p class="text-gray-600 dark:text-gray-400 mt-4 max-w-2xl mx-auto font-medium">Keep your investment
-                        safe with our premium line of hard and soft cases.</p>
-                </div>
+        <section id="cases" class="section">
+            <div class="container text-center">
+                <h2>Protection & Style</h2>
+                <div class="divider center-margin"></div>
+                <p class="subtitle-text">Keep your investment safe with our premium line of hard and soft cases.</p>
 
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <!-- Case 1 -->
-                    <article
-                        class="bg-gray-50 dark:bg-brand-cardDark p-8 rounded-xl text-center group hover:bg-white dark:hover:bg-zinc-800 hover:shadow-xl transition duration-300 border border-gray-100 dark:border-gray-800">
-                        <div class="h-48 flex items-center justify-center mb-6">
-                            <div
-                                class="w-24 h-40 bg-gray-800 rounded-lg shadow-lg relative mx-auto group-hover:-translate-y-2 transition duration-300">
-                                <div
-                                    class="absolute top-2 left-1/2 transform -translate-x-1/2 w-8 h-4 bg-gray-600 rounded">
-                                </div>
-                                <div
-                                    class="absolute bottom-4 left-1/2 transform -translate-x-1/2 w-16 h-20 bg-gray-700 rounded-sm border border-gray-600">
-                                </div>
-                            </div>
+                <div class="grid-3">
+                    <article class="case-card">
+                        <div class="case-icon case-hard">
+                            <div class="case-handle"></div>
                         </div>
-                        <h3 class="font-bold text-lg mb-2 text-gray-900 dark:text-white">Pro Series 2x4</h3>
-                        <p class="text-gray-600 dark:text-gray-400 text-sm mb-4">Hard Case / Vinyl</p>
-                        <p class="text-brand-gold font-bold mb-4 text-lg">$129.00</p>
-                        <button onclick="addToCart('Pro Series 2x4 Case')"
-                            class="text-xs font-bold uppercase border-b-2 border-brand-dark dark:border-gray-400 pb-1 hover:text-brand-gold hover:border-brand-gold dark:hover:text-brand-gold dark:hover:border-brand-gold transition text-gray-900 dark:text-white focus:outline-none focus-visible:text-brand-gold">Add
-                            to Cart</button>
+                        <h3>Pro Series 2x4</h3>
+                        <p>Hard Case / Vinyl</p>
+                        <p class="price">$129.00</p>
+                        <button onclick="addToCart('Pro Series 2x4')" class="btn-link">Add to Cart</button>
                     </article>
 
-                    <!-- Case 2 -->
-                    <article
-                        class="bg-gray-50 dark:bg-brand-cardDark p-8 rounded-xl text-center group hover:bg-white dark:hover:bg-zinc-800 hover:shadow-xl transition duration-300 border border-gray-100 dark:border-gray-800">
-                        <div class="h-48 flex items-center justify-center mb-6">
-                            <div
-                                class="w-28 h-36 bg-amber-900 rounded-lg shadow-lg relative mx-auto opacity-90 group-hover:-translate-y-2 transition duration-300">
-                                <div
-                                    class="absolute top-0 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/leather.png')] opacity-50">
-                                </div>
-                                <div class="absolute top-8 left-2 right-2 h-16 bg-amber-950 rounded opacity-60"></div>
-                            </div>
-                        </div>
-                        <h3 class="font-bold text-lg mb-2 text-gray-900 dark:text-white">Lucasi Hybrid Soft</h3>
-                        <p class="text-gray-600 dark:text-gray-400 text-sm mb-4">Soft Case / Leatherette</p>
-                        <p class="text-brand-gold font-bold mb-4 text-lg">$89.00</p>
-                        <button onclick="addToCart('Lucasi Hybrid Soft Case')"
-                            class="text-xs font-bold uppercase border-b-2 border-brand-dark dark:border-gray-400 pb-1 hover:text-brand-gold hover:border-brand-gold dark:hover:text-brand-gold dark:hover:border-brand-gold transition text-gray-900 dark:text-white focus:outline-none focus-visible:text-brand-gold">Add
-                            to Cart</button>
+                    <article class="case-card">
+                        <div class="case-icon case-soft"></div>
+                        <h3>Famasi Hybrid Soft</h3>
+                        <p>Soft Case / Leatherette</p>
+                        <p class="price">$89.00</p>
+                        <button onclick="addToCart('Hybrid Soft Case')" class="btn-link">Add to Cart</button>
                     </article>
 
-                    <!-- Case 3 -->
-                    <article
-                        class="bg-gray-50 dark:bg-brand-cardDark p-8 rounded-xl text-center group hover:bg-white dark:hover:bg-zinc-800 hover:shadow-xl transition duration-300 border border-gray-100 dark:border-gray-800">
-                        <div class="h-48 flex items-center justify-center mb-6">
-                            <div
-                                class="w-32 h-44 bg-black rounded-lg shadow-lg relative mx-auto border border-gray-700 group-hover:-translate-y-2 transition duration-300 flex items-center justify-center">
-                                <i class="fas fa-lock text-gray-700 text-5xl" aria-hidden="true"></i>
-                            </div>
+                    <article class="case-card">
+                        <div class="case-icon case-tour">
+                            <svg width="40" height="40" viewBox="0 0 24 24" fill="currentColor">
+                                <path
+                                    d="M12 2a4 4 0 0 1 4 4v2h2.5A1.5 1.5 0 0 1 20 9.5v11a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 4 20.5v-11A1.5 1.5 0 0 1 5.5 8H8V6a4 4 0 0 1 4-4zm0 6V6a2 2 0 0 0-2 2v2h4z" />
+                            </svg>
                         </div>
-                        <h3 class="font-bold text-lg mb-2 text-gray-900 dark:text-white">Tour Edition 4x8</h3>
-                        <p class="text-gray-600 dark:text-gray-400 text-sm mb-4">Tournament Case</p>
-                        <p class="text-brand-gold font-bold mb-4 text-lg">$215.00</p>
-                        <button onclick="addToCart('Tour Edition 4x8 Case')"
-                            class="text-xs font-bold uppercase border-b-2 border-brand-dark dark:border-gray-400 pb-1 hover:text-brand-gold hover:border-brand-gold dark:hover:text-brand-gold dark:hover:border-brand-gold transition text-gray-900 dark:text-white focus:outline-none focus-visible:text-brand-gold">Add
-                            to Cart</button>
+                        <h3>Tour Edition 4x8</h3>
+                        <p>Tournament Case</p>
+                        <p class="price">$215.00</p>
+                        <button onclick="addToCart('Tour Edition 4x8')" class="btn-link">Add to Cart</button>
                     </article>
                 </div>
             </div>
         </section>
 
-        <!-- Features / Technology Strip -->
-        <section id="technology"
-            class="bg-gray-100 dark:bg-zinc-900 py-20 scroll-mt-20 transition-colors duration-300 border-y border-gray-200 dark:border-zinc-800">
-            <div class="container mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-12 text-center">
-                <div class="p-6">
-                    <div class="w-20 h-20 bg-brand-gold/10 rounded-full flex items-center justify-center mx-auto mb-6">
-                        <i class="fas fa-bullseye text-4xl text-brand-gold hover:scale-110 transition duration-300"
-                            aria-hidden="true"></i>
+        <section id="technology" class="section bg-light">
+            <div class="container grid-3 text-center">
+                <div class="tech-card">
+                    <div class="tech-icon-circle">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <circle cx="12" cy="12" r="6"></circle>
+                            <circle cx="12" cy="12" r="2"></circle>
+                        </svg>
                     </div>
-                    <h3 class="text-xl font-bold mb-3 uppercase tracking-wide text-gray-900 dark:text-white">Zero
-                        Flexpoint</h3>
-                    <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed font-medium">Drastically reduces
-                        deflection for dead-on accuracy with every shot you take.</p>
+                    <h3>Zero Flexpoint</h3>
+                    <p>Drastically reduces deflection for dead-on accuracy with every shot you take.</p>
                 </div>
-                <div class="p-6 border-l-0 md:border-l border-r-0 md:border-r border-gray-300 dark:border-zinc-700">
-                    <div class="w-20 h-20 bg-brand-gold/10 rounded-full flex items-center justify-center mx-auto mb-6">
-                        <i class="fas fa-medal text-4xl text-brand-gold hover:scale-110 transition duration-300"
-                            aria-hidden="true"></i>
+
+                <div class="tech-card border-x">
+                    <div class="tech-icon-circle">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <polygon points="12 15 17 21 7 21 12 15"></polygon>
+                            <path
+                                d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z">
+                            </path>
+                        </svg>
                     </div>
-                    <h3 class="text-xl font-bold mb-3 uppercase tracking-wide text-gray-900 dark:text-white">Lifetime
-                        Guarantee</h3>
-                    <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed font-medium">We stand behind our
-                        craftsmanship. Lucasi cues are warranted for life, even against warpage.</p>
+                    <h3>Lifetime Guarantee</h3>
+                    <p>We stand behind our craftsmanship. Famasi cues are warranted for life, even against warpage.</p>
                 </div>
-                <div class="p-6">
-                    <div class="w-20 h-20 bg-brand-gold/10 rounded-full flex items-center justify-center mx-auto mb-6">
-                        <i class="fas fa-hand-holding-heart text-4xl text-brand-gold hover:scale-110 transition duration-300"
-                            aria-hidden="true"></i>
+
+                <div class="tech-card">
+                    <div class="tech-icon-circle">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path
+                                d="M20.42 4.58a5.4 5.4 0 0 0-7.65 0l-.77.78-.77-.78a5.4 5.4 0 0 0-7.65 0C1.46 6.7 1.33 10.28 4 13l8 8 8-8c2.67-2.72 2.54-6.3.42-8.42z">
+                            </path>
+                        </svg>
                     </div>
-                    <h3 class="text-xl font-bold mb-3 uppercase tracking-wide text-gray-900 dark:text-white">Premium
-                        Woods</h3>
-                    <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed font-medium">Hand-selected exotic
-                        woods from around the globe, cured and turned for stability.</p>
+                    <h3>Premium Woods</h3>
+                    <p>Hand-selected exotic woods from around the globe, cured and turned for stability.</p>
                 </div>
             </div>
         </section>
 
-        <!-- Custom/Bespoke Section -->
-        <section id="custom" class="bg-brand-dark text-white py-24 relative overflow-hidden scroll-mt-20">
-            <div class="absolute inset-0 opacity-20"
-                style="background-image: url('https://www.transparenttextures.com/patterns/carbon-fibre.png');"></div>
-            <div class="container mx-auto px-6 relative z-10 flex flex-col md:flex-row items-center">
-                <div class="md:w-1/2 mb-10 md:mb-0 text-center md:text-left">
-                    <h2 class="text-4xl font-serif font-bold mb-6">Built For You. <br> <span
-                            class="text-brand-gold">Built To Win.</span></h2>
-                    <p class="text-gray-300 mb-8 leading-relaxed max-w-md text-lg mx-auto md:mx-0">
-                        Customize your cue with our diverse range of wraps, tips, and engravings.
-                        Every Lucasi cue is checked for straightness and finish perfection before it leaves our
-                        facility.
-                    </p>
-                    <button
-                        class="bg-transparent border-2 border-brand-gold text-brand-gold px-10 py-4 font-bold text-sm uppercase tracking-wider hover:bg-brand-gold hover:text-brand-dark transition duration-300 rounded focus:outline-none focus-visible:ring-2 focus-visible:ring-white">
-                        Start Customizing
-                    </button>
+        <section id="custom" class="section dark-section relative-section">
+            <div class="bg-texture"></div>
+            <div class="container flex-row">
+                <div class="text-block">
+                    <h2>Built For You. <br> <span>Built To Win.</span></h2>
+                    <p>Customize your cue with our diverse range of wraps, tips, and engravings. Every Famasi cue is
+                        checked for straightness and finish perfection before it leaves our facility.</p>
+                    <button class="btn btn-outline-gold">Start Customizing</button>
                 </div>
-                <div class="w-full md:w-1/2 flex justify-center">
-                    <!-- Abstract representation of cue parts -->
-                    <div
-                        class="relative w-64 h-64 md:w-72 md:h-72 border-4 border-zinc-700 rounded-full flex items-center justify-center animate-float shrink-0">
-                        <div class="absolute w-56 h-56 md:w-64 md:h-64 border-4 border-zinc-600 rounded-full"></div>
-                        <div
-                            class="absolute w-48 h-48 md:w-56 md:h-56 border-4 border-brand-gold rounded-full animate-pulse opacity-50">
+                <div class="image-block center-content">
+                    <div class="custom-visual animate-float">
+                        <div class="circle-outer"></div>
+                        <div class="circle-inner"></div>
+                        <svg class="icon-tool" width="80" height="80" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="1.5">
+                            <path
+                                d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z">
+                            </path>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="team" class="section">
+            <div class="container">
+                <div class="text-center">
+                    <h2>Meet the Team</h2>
+                    <div class="divider center-margin"></div>
+                    <p class="subtitle-text">The developers behind Famasi.</p>
+                </div>
+
+                <div class="grid-4 team-grid">
+                    <article class="team-card">
+                        <div class="team-avatar avatar-1">
+                            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="12" cy="7" r="4"></circle>
+                            </svg>
                         </div>
-                        <i class="fas fa-tools text-6xl md:text-7xl text-gray-500" aria-hidden="true"></i>
-                    </div>
+                        <h3>Aaron Lim</h3>
+                        <p>Web Developer</p>
+                        <a href="../coverLetter/aaronLim/index.html" class="btn btn-outline-gold btn-sm">View
+                            Profile</a>
+                    </article>
+
+                    <article class="team-card">
+                        <div class="team-avatar avatar-2">
+                            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="12" cy="7" r="4"></circle>
+                            </svg>
+                        </div>
+                        <h3>Wai Chen</h3>
+                        <p>Web Developer</p>
+                        <a href="../coverLetter/waiChen/index.html" class="btn btn-outline-gold btn-sm">View Profile</a>
+                    </article>
+
+                    <article class="team-card">
+                        <div class="team-avatar avatar-3">
+                            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="12" cy="7" r="4"></circle>
+                            </svg>
+                        </div>
+                        <h3>Sheng Jun</h3>
+                        <p>Web Developer</p>
+                        <a href="../coverLetter/shengJun/index.html" class="btn btn-outline-gold btn-sm">View
+                            Profile</a>
+                    </article>
+
+                    <article class="team-card">
+                        <div class="team-avatar avatar-4">
+                            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="12" cy="7" r="4"></circle>
+                            </svg>
+                        </div>
+                        <h3>Te Zhi</h3>
+                        <p>Web Developer</p>
+                        <a href="../coverLetter/teZhi/index.html" class="btn btn-outline-gold btn-sm">View Profile</a>
+                    </article>
                 </div>
             </div>
         </section>
 
-        <!-- Newsletter -->
-        <section class="bg-brand-gold py-16">
-            <div class="container mx-auto px-6 text-center">
-                <h2 class="text-3xl font-bold text-brand-dark mb-4 uppercase tracking-wide">Join the Inner Circle</h2>
-                <p class="text-brand-dark opacity-90 mb-8 max-w-lg mx-auto font-bold">Subscribe to receive updates,
-                    access to exclusive deals, and more.</p>
-                <form onsubmit="handleNewsletter(event)"
-                    class="max-w-md mx-auto flex shadow-xl rounded overflow-hidden">
-                    <label for="newsletter-email" class="sr-only">Email Address</label>
-                    <input type="email" id="newsletter-email" placeholder="Enter your email address"
-                        class="flex-1 px-6 py-4 outline-none text-gray-800 bg-white focus:bg-gray-50" required>
-                    <button type="submit"
-                        class="bg-black text-white px-8 py-4 font-bold uppercase hover:bg-zinc-800 transition focus:outline-none focus-visible:bg-zinc-800">Join</button>
+        <section class="section bg-gold">
+            <div class="container text-center">
+                <h2>Join the Inner Circle</h2>
+                <p>Subscribe to receive updates, access to exclusive deals, and more.</p>
+                <form onsubmit="handleNewsletter(event)" class="newsletter-form">
+                    <input type="email" placeholder="Enter your email address" required>
+                    <button type="submit">Join</button>
                 </form>
             </div>
         </section>
     </main>
 
-    <!-- Footer -->
-    <footer class="bg-black text-gray-400 py-16 border-t border-zinc-900">
-        <div class="container mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-12">
-
-            <!-- Brand -->
+    <footer class="main-footer">
+        <div class="container grid-4">
             <div>
-                <a href="#"
-                    class="text-2xl font-serif font-bold text-white tracking-widest uppercase block mb-6 focus:outline-none focus-visible:text-brand-gold">
-                    Lucasi<span class="text-brand-gold">.</span>
-                </a>
-                <p class="text-sm leading-relaxed mb-6 font-medium">
-                    Bringing you the best in billiards technology and style since 1990.
-                </p>
-                <div class="flex space-x-4">
-                    <a href="#" aria-label="Facebook"
-                        class="hover:text-white transition p-1 rounded focus:outline-none focus-visible:ring-1 focus-visible:ring-brand-gold"><i
-                            class="fab fa-facebook-f" aria-hidden="true"></i></a>
-                    <a href="#" aria-label="Instagram"
-                        class="hover:text-white transition p-1 rounded focus:outline-none focus-visible:ring-1 focus-visible:ring-brand-gold"><i
-                            class="fab fa-instagram" aria-hidden="true"></i></a>
-                    <a href="#" aria-label="Twitter"
-                        class="hover:text-white transition p-1 rounded focus:outline-none focus-visible:ring-1 focus-visible:ring-brand-gold"><i
-                            class="fab fa-twitter" aria-hidden="true"></i></a>
-                    <a href="#" aria-label="YouTube"
-                        class="hover:text-white transition p-1 rounded focus:outline-none focus-visible:ring-1 focus-visible:ring-brand-gold"><i
-                            class="fab fa-youtube" aria-hidden="true"></i></a>
-                </div>
+                <a href="#" class="logo">Famasi<span>.</span></a>
+                <p>Bringing you the best in billiards technology and style since 1990.</p>
             </div>
-
-            <!-- Links -->
-            <nav aria-label="Footer Shop Navigation">
-                <h4 class="text-white font-bold uppercase tracking-wider mb-6">Shop</h4>
-                <ul class="space-y-3 text-sm font-medium">
-                    <li><a href="#"
-                            class="hover:text-brand-gold transition focus:outline-none focus-visible:text-brand-gold">Pool
-                            Cues</a></li>
-                    <li><a href="#"
-                            class="hover:text-brand-gold transition focus:outline-none focus-visible:text-brand-gold">Carom
-                            Cues</a></li>
-                    <li><a href="#"
-                            class="hover:text-brand-gold transition focus:outline-none focus-visible:text-brand-gold">Cue
-                            Cases</a></li>
-                    <li><a href="#"
-                            class="hover:text-brand-gold transition focus:outline-none focus-visible:text-brand-gold">Accessories</a>
-                    </li>
-                    <li><a href="#"
-                            class="hover:text-brand-gold transition focus:outline-none focus-visible:text-brand-gold">Gift
-                            Cards</a></li>
-                </ul>
-            </nav>
-
-            <!-- Support -->
-            <nav aria-label="Footer Support Navigation">
-                <h4 class="text-white font-bold uppercase tracking-wider mb-6">Support</h4>
-                <ul class="space-y-3 text-sm font-medium">
-                    <li><a href="#"
-                            class="hover:text-brand-gold transition focus:outline-none focus-visible:text-brand-gold">Dealer
-                            Locator</a></li>
-                    <li><a href="#"
-                            class="hover:text-brand-gold transition focus:outline-none focus-visible:text-brand-gold">Warranty
-                            Registration</a></li>
-                    <li><a href="#"
-                            class="hover:text-brand-gold transition focus:outline-none focus-visible:text-brand-gold">Shipping
-                            & Returns</a></li>
-                    <li><a href="#"
-                            class="hover:text-brand-gold transition focus:outline-none focus-visible:text-brand-gold">Contact
-                            Us</a></li>
-                    <li><a href="#"
-                            class="hover:text-brand-gold transition focus:outline-none focus-visible:text-brand-gold">Privacy
-                            Policy</a></li>
-                </ul>
-            </nav>
-
-            <!-- Contact -->
             <div>
-                <h4 class="text-white font-bold uppercase tracking-wider mb-6">Contact</h4>
-                <ul class="space-y-3 text-sm font-medium">
-                    <li class="flex items-start"><i class="fas fa-map-marker-alt mt-1 mr-3 text-brand-gold"
-                            aria-hidden="true"></i> 123 Billiards Way, <br>Pool City, ST 12345</li>
-                    <li class="flex items-center"><i class="fas fa-phone mr-3 text-brand-gold" aria-hidden="true"></i>
-                        (800) 555-0199</li>
-                    <li class="flex items-center"><i class="fas fa-envelope mr-3 text-brand-gold"
-                            aria-hidden="true"></i> support@lucasicues.com</li>
+                <h4>Shop</h4>
+                <ul>
+                    <li><a href="#">Pool Cues</a></li>
+                    <li><a href="#">Cue Cases</a></li>
+                    <li><a href="#">Accessories</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4>Support</h4>
+                <ul>
+                    <li><a href="#">Warranty Registration</a></li>
+                    <li><a href="#">Shipping & Returns</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4>Contact</h4>
+                <ul>
+                    <li>123 Billiards Way, Pool City</li>
+                    <li>(800) 555-0199</li>
+                    <li>support@famasicues.com</li>
                 </ul>
             </div>
         </div>
-        <div
-            class="container mx-auto px-6 mt-16 pt-8 border-t border-zinc-900 text-center text-xs text-gray-600 font-medium">
-            <p>&copy; 2023 Lucasi Cues Clone. All rights reserved. This is a demo.</p>
+        <div class="footer-bottom">
+            <p>&copy; 2023 Famasi Cues Clone. All rights reserved.</p>
         </div>
     </footer>
 
-    <!-- Toast Notification (Hidden by default) -->
-    <div id="toast" role="alert" aria-live="assertive"
-        class="fixed bottom-5 right-5 bg-white dark:bg-zinc-800 border-l-4 border-brand-gold shadow-2xl p-4 transform translate-y-24 transition duration-300 z-[70] flex items-center rounded-r-lg">
-        <div class="text-green-500 mr-3 text-xl"><i class="fas fa-check-circle" aria-hidden="true"></i></div>
+    <div id="toast" class="toast hidden-toast">
+        <div class="toast-icon">&#10003;</div>
         <div>
-            <h4 class="font-bold text-gray-900 dark:text-white text-sm" id="toast-title">Added to Cart</h4>
-            <p id="toast-message" class="text-gray-600 dark:text-gray-300 text-xs font-medium">Item successfully added.
-            </p>
+            <h4 id="toast-title">Added to Cart</h4>
+            <p id="toast-message">Item successfully added.</p>
         </div>
     </div>
 
-    <!-- External Script -->
     <script src="script.js"></script>
 </body>
 
