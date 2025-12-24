@@ -30,6 +30,11 @@ html.dark {
     padding: 0;
 }
 
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 100px;
+}
+
 body {
     font-family: var(--font-sans);
     color: var(--color-text-main);
@@ -73,7 +78,7 @@ img {
     align-items: center;
 }
 
-flex-row {
+.flex-row {
     display: flex;
     flex-direction: row;
     gap: 60px;
@@ -93,10 +98,19 @@ flex-row {
     text-align: center;
 }
 
+/* UPDATED: Explicit Grid Columns (2 or 4 only) */
 .grid-4 {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 30px;
+    /* Default: 4 items per row on large screens */
+    grid-template-columns: repeat(4, 1fr);
+}
+
+/* Force 2 items per row on medium screens (Tablets/Small Laptops) */
+@media (max-width: 1200px) {
+    .grid-4 {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 
 .grid-3 {
@@ -150,9 +164,19 @@ flex-row {
     color: var(--color-gold);
 }
 
+/* Icons Row Fix */
+.nav-icons {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
 .nav-icons button {
     color: white;
-    margin-left: 15px;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .nav-icons button:hover {
@@ -177,6 +201,11 @@ flex-row {
 
 /* Mobile Menu */
 .mobile-toggle {
+    display: none;
+}
+
+/* Force hide on Desktop */
+.nav-icons .mobile-toggle {
     display: none;
 }
 
@@ -246,6 +275,10 @@ flex-row {
     letter-spacing: 1px;
     transition: 0.3s;
     border-radius: 4px;
+    display: inline-block;
+    /* Essential for <a> tags to look like buttons */
+    text-align: center;
+    cursor: pointer;
 }
 
 .btn-primary {
@@ -467,20 +500,26 @@ html.dark .bg-light {
 }
 
 /* Dark Section (Shafts & Custom) */
-.dark-section { background: var(--color-dark); color: white; border-top: 1px solid #333; }
-
-.feature-list li { 
-    margin-bottom: 15px; 
-    font-size: 1.1rem; 
-    display: flex; 
-    align-items: center; 
+.dark-section {
+    background: var(--color-dark);
+    color: white;
+    border-top: 1px solid #333;
 }
-.feature-list li span { 
-    color: var(--color-gold); 
-    margin-right: 15px; 
+
+.feature-list li {
+    margin-bottom: 15px;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+}
+
+.feature-list li span {
+    color: var(--color-gold);
+    margin-right: 15px;
     font-size: 1.2rem;
 }
 
+/* Shaft Display Card */
 .shaft-display {
     background: #0f0f0f;
     border: 1px solid #333;
@@ -555,29 +594,115 @@ html.dark .bg-light {
     text-align: center;
     background: var(--color-white);
     border-radius: 8px;
+    transition: 0.3s;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.case-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
 }
 
 .case-icon {
-    height: 150px;
-    background: #ddd;
+    height: 160px;
+    width: 100%;
     margin-bottom: 20px;
     border-radius: 8px;
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
 }
 
+/* 1. Hard Case (Pro Series) */
 .case-hard {
-    background: #444;
+    background: transparent;
 }
 
+.case-hard::before {
+    content: '';
+    width: 80px;
+    height: 120px;
+    background: #374151;
+    border-radius: 12px;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+    position: relative;
+    z-index: 2;
+}
+
+.case-hard::after {
+    content: '';
+    position: absolute;
+    top: 55px;
+    width: 50px;
+    height: 60px;
+    background: #4b5563;
+    border-radius: 4px;
+    z-index: 3;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.case-icon.case-hard .case-handle {
+    position: absolute;
+    top: 15px;
+    width: 30px;
+    height: 10px;
+    background: #1f2937;
+    border-radius: 4px;
+    z-index: 1;
+}
+
+/* 2. Soft Case (Hybrid) */
 .case-soft {
-    background: #8b4513;
+    background: transparent;
 }
 
+.case-soft::before {
+    content: '';
+    width: 90px;
+    height: 110px;
+    background: #8B4513;
+    border-radius: 15px;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+    position: relative;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 0, 0, 0.05) 1px, transparent 1px);
+    background-size: 4px 4px;
+}
+
+.case-soft::after {
+    content: '';
+    position: absolute;
+    top: 50px;
+    width: 70px;
+    height: 40px;
+    background: #5D2906;
+    border-radius: 4px;
+    z-index: 3;
+}
+
+/* 3. Tour Case (Black) */
 .case-tour {
-    background: black;
-    color: #333;
+    background: transparent;
+}
+
+.case-tour::before {
+    content: '';
+    width: 85px;
+    height: 125px;
+    background: #000;
+    border-radius: 6px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+    border: 1px solid #333;
+    position: absolute;
+}
+
+.case-tour svg {
+    position: relative;
+    z-index: 5;
+    color: #4b5563;
+    width: 32px;
+    height: 32px;
 }
 
 /* TECHNOLOGY Section Styles */
@@ -640,6 +765,19 @@ html.dark .border-x {
     background-image: repeating-linear-gradient(45deg, #222 25%, transparent 25%, transparent 75%, #222 75%, #222), repeating-linear-gradient(45deg, #222 25%, #09090b 25%, #09090b 75%, #222 75%, #222);
     background-position: 0 0, 10px 10px;
     background-size: 20px 20px;
+}
+
+#custom .bg-texture {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('Images/custom-bg.jpg');
+    background-size: cover;
+    background-position: center;
+    opacity: 1;
+    /* Reset opacity for the image */
+}
+
+/* NEW: Gap between paragraph and button */
+#custom p {
+    margin-bottom: 30px;
 }
 
 .text-block span {
@@ -725,7 +863,6 @@ html.dark .border-x {
     justify-content: space-between;
     height: 100%;
     gap: 15px;
-    /* Added gap to space out elements */
 }
 
 .team-card:hover {
@@ -1010,6 +1147,11 @@ html.dark .border-x {
         display: block;
     }
 
+    /* Fix to display mobile toggle in Nav Icons */
+    .nav-icons .mobile-toggle {
+        display: flex;
+    }
+
     .hero .title {
         font-size: 2.5rem;
     }
@@ -1018,6 +1160,7 @@ html.dark .border-x {
         flex-direction: column;
     }
 
+    /* Force single column on mobile */
     .grid-4,
     .grid-3 {
         grid-template-columns: 1fr;

@@ -76,7 +76,16 @@ button {
 .container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 1.5rem;
+    /* Default padding for larger screens */
+    padding: 0 2rem;
+}
+
+/* Responsive adjustment: Add more side margin/padding on small screens */
+@media (max-width: 768px) {
+    .container {
+        /* Increased to prevent timeline dots from touching the edge */
+        padding: 0 2.5rem;
+    }
 }
 
 .hidden {
@@ -148,6 +157,7 @@ nav {
     font-weight: bold;
     letter-spacing: 0.1em;
     text-transform: uppercase;
+    margin-left: 2rem;
 }
 
 .logo span {
@@ -288,9 +298,9 @@ header {
     color: var(--color-text-muted);
     font-size: 1.5rem;
     font-style: italic;
-    display: block;
+    display: inline-block;
     font-family: var(--font-sans);
-    margin-top: 0.25rem;
+    margin-left: 10px;
 }
 
 .hero-desc {
@@ -729,7 +739,7 @@ html.dark .progress-bar {
     background-color: #09090b;
     color: white;
     padding: 3rem 1.5rem;
-    text-center;
+    text-align: center;
 }
 
 .cta-buttons {
