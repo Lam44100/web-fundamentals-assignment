@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aaron Lim | Developer Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        
+        body {
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        section {
+            padding: 60px 0;
+        }
+        
+        h1, h2, h3 {
+            margin-bottom: 20px;
+        }
+        
+        p {
+            margin-bottom: 20px;
+        }
+        
+        a {
+            color: #C5A059;
+            text-decoration: none;
+        }
+        
+        a:hover {
+            text-decoration: underline;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #C5A059;
+            color: #000;
+            border: none;
+            border-radius: 5px;
+            margin: 10px 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        
+        .card {
+            background: #f5f5f5;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+            transition: all 0.3s ease;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+        }
+        
+        .grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        .grid-item {
+            flex: 1;
+            min-width: 250px;
+        }
+        
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+        
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+        
+        .project-card {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        
+        @media (max-width: 768px) {
+            .skills-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div style="background: #222; color: #fff; padding: 10px 0; font-size: 14px;">
+        <div class="container" style="display: flex; justify-content: space-between;">
+            <span>Developer Portfolio</span>
+            <a href="../../website/index.html" style="color: #C5A059;">← Return to Main Site</a>
+        </div>
+    </div>
+
+    <nav style="background: #333; padding: 15px 0; position: sticky; top: 0;">
+        <div class="container" style="display: flex; justify-content: space-between; align-items: center;">
+            <a href="#" style="color: #fff; font-size: 24px; font-weight: bold;">Aaron Lim</a>
+            <div>
+                <a href="#about" style="color: #fff; margin: 0 15px;">About</a>
+                <a href="#expertise" style="color: #fff; margin: 0 15px;">Expertise</a>
+                <a href="#projects" style="color: #fff; margin: 0 15px;">Projects</a>
+                <a href="#experience" style="color: #fff; margin: 0 15px;">Journey</a>
+                <a href="#contact" style="color: #fff; margin: 0 15px;">Connect</a>
+            </div>
+        </div>
+    </nav>
+
+    <section style="background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url(''); background-size: cover; color: white; text-align: center;">
+        <div class="container">
+            <h3 style="color: #C5A059; letter-spacing: 3px; margin-bottom: 20px;"> BEGINNER DEVELOPER </h3>
+            <h1 style="font-size: 48px; margin-bottom: 20px;">Code With <br><span style="font-style: italic;">Passion</span></h1>
+            <p style="font-size: 18px; max-width: 600px; margin: 0 auto 30px;">
+                Hello and welcome! I am Aaron Lim. Student at Sunway University
+            </p>
+            <div>
+                <a href="#projects" class="btn">View Projects</a>
+                <a href="#contact" class="btn" style="background: transparent; border: 2px solid #C5A059; color: #C5A059;">Get In Touch</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="about">
+        <div class="container">
+            <h2 style="text-align: center; margin-bottom: 40px;">About the Developer</h2>
+            <div style="max-width: 800px; margin: 0 auto;">
+                <h3 style="text-align: center; margin-bottom: 20px;">Crafting Digital Solutions</h3>
+                <p style="text-align: center; margin-bottom: 30px;">
+                    I'm a passionate developer learning to building efficient, scalable systems. 
+                    With basic knowledge in Python, Java, and modern web technologies, I aim to transform complex problems 
+                    into elegant solutions.
+                </p>
+                <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 30px; margin: 30px 0;">
+                    <div style="text-align: center; flex: 1; min-width: 200px;">
+                        <div style="font-size: 40px; margin-bottom: 10px; color: #C5A059;">🐍</div>
+                        <div style="font-weight: bold; margin-bottom: 5px;">Python Development</div>
+                        <div style="color: #666; font-size: 14px;">Building foundational programming skills</div>
+                    </div>
+                    <div style="text-align: center; flex: 1; min-width: 200px;">
+                        <div style="font-size: 40px; margin-bottom: 10px; color: #C5A059;">☕</div>
+                        <div style="font-weight: bold; margin-bottom: 5px;">Java Development</div>
+                        <div style="color: #666; font-size: 14px;">Learning object-oriented concepts</div>
+                    </div>
+                    <div style="text-align: center; flex: 1; min-width: 200px;">
+                        <div style="font-size: 40px; margin-bottom: 10px; color: #C5A059;">🗄️</div>
+                        <div style="font-weight: bold; margin-bottom: 5px;">Database Design</div>
+                        <div style="color: #666; font-size: 14px;">Understanding data structures</div>
+                    </div>
+                    <div style="text-align: center; flex: 1; min-width: 200px;">
+                        <div style="font-size: 40px; margin-bottom: 10px; color: #C5A059;">👨‍💻</div>
+                        <div style="font-weight: bold; margin-bottom: 5px;">Web Development</div>
+                        <div style="color: #666; font-size: 14px;">Creating responsive websites</div>
+                    </div>
+                </div>
+                <div style="text-align: center; margin-top: 30px;">
+                    <a href="#contact" class="btn">Start a Project</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section id="expertise" style="background: #222; color: white;">
+        <div class="container">
+            <h2 style="text-align: center; margin-bottom: 40px;">Technical Expertise</h2>
+            <p style="text-align: center; margin-bottom: 40px; color: #aaa;">
+                Basic programming foundation through various hands-on development experience
+            </p>
+
+
+            <div class="skills-grid">
+
+                <div class="card" style="background: #333; color: white; text-align: center; height: 100%;">
+                    <div style="font-size: 40px; margin-bottom: 15px;">🐍</div>
+                    <h4>Python Development</h4>
+                    <div style="height: 5px; background: #555; margin: 15px 0; border-radius: 3px;">
+                        <div style="width: 50%; height: 100%; background: #C5A059; border-radius: 3px;"></div>
+                    </div>
+                    <p style="color: #aaa; font-size: 14px;">
+                        Simple script and automation, console applications
+                    </p>
+                </div>
+
+                <div class="card" style="background: #333; color: white; text-align: center; height: 100%;">
+                    <div style="font-size: 40px; margin-bottom: 15px;">☕</div>
+                    <h4>Java</h4>
+                    <div style="height: 5px; background: #555; margin: 15px 0; border-radius: 3px;">
+                        <div style="width: 60%; height: 100%; background: #C5A059; border-radius: 3px;"></div>
+                    </div>
+                    <p style="color: #aaa; font-size: 14px;">
+                        Object-oriented programming, console applications
+                    </p>
+                </div>
+
+                <div class="card" style="background: #333; color: white; text-align: center; height: 100%;">
+                    <div style="font-size: 40px; margin-bottom: 15px;">🗄️</div>
+                    <h4>Database Design</h4>
+                    <div style="height: 5px; background: #555; margin: 15px 0; border-radius: 3px;">
+                        <div style="width: 70%; height: 100%; background: #C5A059; border-radius: 3px;"></div>
+                    </div>
+                    <p style="color: #aaa; font-size: 14px;">
+                        SQL, Optimization, Analytics
+                    </p>
+                </div>
+
+                <div class="card" style="background: #333; color: white; text-align: center; height: 100%;">
+                    <div style="font-size: 40px; margin-bottom: 15px;">👨‍💻</div>
+                    <h4>Web Development</h4>
+                    <div style="height: 5px; background: #555; margin: 15px 0; border-radius: 3px;">
+                        <div style="width: 80%; height: 100%; background: #C5A059; border-radius: 3px;"></div>
+                    </div>
+                    <p style="color: #aaa; font-size: 14px;">
+                        HTML/CSS, JavaScript
+                    </p>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 50px;">
+                <h3 style="margin-bottom: 30px;">Skills</h3>
+                <div>
+                    <span style="background: #333; color: #aaa; padding: 8px 16px; border-radius: 20px; margin: 5px; display: inline-block;">Problem Solving</span>
+                    <span style="background: #333; color: #aaa; padding: 8px 16px; border-radius: 20px; margin: 5px; display: inline-block;">Debugging Skills</span>
+                    <span style="background: #333; color: #aaa; padding: 8px 16px; border-radius: 20px; margin: 5px; display: inline-block;">Critical Thinking</span>
+                    <span style="background: #333; color: #aaa; padding: 8px 16px; border-radius: 20px; margin: 5px; display: inline-block;">Adaptability</span>
+                    <span style="background: #333; color: #aaa; padding: 8px 16px; border-radius: 20px; margin: 5px; display: inline-block;">Project Planning</span>
+                    <span style="background: #333; color: #aaa; padding: 8px 16px; border-radius: 20px; margin: 5px; display: inline-block;">Self-Learning</span>
+                    <span style="background: #333; color: #aaa; padding: 8px 16px; border-radius: 20px; margin: 5px; display: inline-block;">Time Management</span>
+                    <span style="background: #333; color: #aaa; padding: 8px 16px; border-radius: 20px; margin: 5px; display: inline-block;">Documentation</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section id="projects">
+        <div class="container">
+            <h2 style="text-align: center; margin-bottom: 40px;">Featured Projects</h2>
+            <p style="text-align: center; margin-bottom: 40px; color: #666;">
+                Basic recreation of real-world applications
+            </p>
+
+
+            <div class="projects-grid">
+                <div class="card project-card" style="display: flex; flex-direction: column;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 15px;">
+                        <div>
+                            <span style="color: #C5A059; font-size: 12px; font-weight: bold;">PYTHON</span>
+                            <h3 style="margin-top: 5px;">Python Library Management System</h3>
+                        </div>
+                        <div style="font-size: 30px; color: #C5A059;">📚</div>
+                    </div>
+                    <p style="color: #666; flex-grow: 1;">
+                        A console-based library system I built while learning Python fundamentals. Manages book checkouts, tracks due dates, and handles basic user operations.
+                    </p>
+                </div>
+
+                <div class="card project-card" style="display: flex; flex-direction: column;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 15px;">
+                        <div>
+                            <span style="color: #C5A059; font-size: 12px; font-weight: bold;">ENTERPRISE JAVA</span>
+                            <h3 style="margin-top: 5px;">Library Manager</h3>
+                        </div>
+                        <div style="font-size: 30px; color: #C5A059;">📦</div>
+                    </div>
+                    <p style="color: #666; flex-grow: 1;">
+                        Enhanced library system with inventory management. Built using object-oriented principles to understand classes, inheritance, and basic GUI concepts.
+                    </p>
+                </div>
+
+                <div class="card project-card" style="display: flex; flex-direction: column;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 15px;">
+                        <div>
+                            <span style="color: #C5A059; font-size: 12px; font-weight: bold;">DATABASE</span>
+                            <h3 style="margin-top: 5px;">Academic Conference Database</h3>
+                        </div>
+                        <div style="font-size: 30px; color: #C5A059;">🗄️</div>
+                    </div>
+                    <p style="color: #666; flex-grow: 1;">
+                        A conceptual database design for an academic conference paper submission system. Created ER diagrams and SQL to handle papers, authors, reviewers, and submissions.
+                    </p>
+                </div>
+
+                <div class="card project-card" style="display: flex; flex-direction: column;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 15px;">
+                        <div>
+                            <span style="color: #C5A059; font-size: 12px; font-weight: bold;">WEB DEVELOPMENT</span>
+                            <h3 style="margin-top: 5px;">Website featuring pool-cues</h3>
+                        </div>
+                        <div style="font-size: 30px; color: #C5A059;">🌐</div>
+                    </div>
+                    <p style="color: #666; flex-grow: 1;">
+                        This current project - building a complete, responsive website from scratch. Implementing modern web design and client-side validation using JavaScript.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="experience" style="background: #f5f5f5;">
+        <div class="container">
+            <h2 style="text-align: center; margin-bottom: 40px;">Learning Journey</h2>
+            <p style="text-align: center; margin-bottom: 40px; color: #666;">
+                A timeline of personal growth and accomplishments in coding
+            </p>
+
+            <div style="max-width: 800px; margin: 0 auto;">
+                <div class="card" style="margin-bottom: 30px;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 15px;">
+                        <h3>Web Development</h3>
+                        <span style="color: #C5A059; font-weight: bold;">PRESENT</span>
+                    </div>
+                    <ul style="padding-left: 20px; color: #666;">
+                        <li>Learning frontend development (HTML & CSS)</li>
+                        <li>Enhancing web designing skills</li>
+                        <li>Learning JavaScript fundamentals</li>
+                        <li>Working on current web project</li>
+                        <li>Next step: learning backend integration</li>
+                    </ul>
+                </div>
+
+                <div class="card" style="margin-bottom: 30px;">
+                    <div style="margin-bottom: 15px;">
+                        <h3>Expanding Skills</h3>
+                    </div>
+                    <ul style="padding-left: 20px; color: #666;">
+                        <li>Transitioned to Java programming</li>
+                        <li>Learned object-oriented programming principles</li>
+                        <li>Started learning database fundamentals</li>
+                        <li>Built: Enhanced Java Library System with GUI</li>
+                        <li>Built: Academic Conference Database Design</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <div style="margin-bottom: 15px;">
+                        <h3>The Beginning</h3>
+                    </div>
+                    <ul style="padding-left: 20px; color: #666;">
+                        <li>Started learning programming basics with Python</li>
+                        <li>Learned fundamental programming concepts (variables, loops, functions)</li>
+                        <li>Built first simple console applications</li>
+                        <li>Completed introductory coding courses</li>
+                        <li>Built: Python Library Management System (basic console version)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" style="background: #222; color: white;">
+        <div class="container">
+            <div style="display: flex; flex-wrap: wrap; gap: 40px;">
+                <div style="flex: 1; min-width: 300px;">
+                    <h2 style="margin-bottom: 20px;">Let's Build<br><span style="color: #C5A059;">Together</span></h2>
+                    <p style="color: #aaa; margin-bottom: 30px;">
+                        Have a project in mind? Contact me and we should build it together!!!
+                    </p>
+                    
+                    <div>
+                        <div style="display: flex; align-items: center; margin-bottom: 20px;">
+                            <div style="width: 50px; height: 50px; border-radius: 50%; background: #333; display: flex; align-items: center; justify-content: center; margin-right: 15px; color: #C5A059;">
+                                ✉️
+                            </div>
+                            <div>
+                                <div style="font-weight: bold;">Email</div>
+                                <div style="color: #aaa;">aaronlim@gmail.com</div>
+                            </div>
+                        </div>
+                        
+                        <div style="display: flex; align-items: center; margin-bottom: 20px;">
+                            <div style="width: 50px; height: 50px; border-radius: 50%; background: #333; display: flex; align-items: center; justify-content: center; margin-right: 15px; color: #C5A059;">
+                                🐱
+                            </div>
+                            <div>
+                                <div style="font-weight: bold;">GitHub</div>
+                                <div style="color: #aaa;">github.com/aaronlim</div>
+                            </div>
+                        </div>
+                        
+                        <div style="display: flex; align-items: center; margin-bottom: 20px;">
+                            <div style="width: 50px; height: 50px; border-radius: 50%; background: #333; display: flex; align-items: center; justify-content: center; margin-right: 15px; color: #C5A059;">
+                                💼
+                            </div>
+                            <div>
+                                <div style="font-weight: bold;">LinkedIn</div>
+                                <div style="color: #aaa;">linkedin.com/aaronlim</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="flex: 1; min-width: 300px;">
+                    <div class="card" style="background: #333; padding: 30px;">
+                        <h3 style="margin-bottom: 20px;">Send a Message</h3>
+                        <form id="contact-form">
+                            <div style="display: flex; gap: 15px; margin-bottom: 15px;">
+                                <input type="text" placeholder="Name" required style="flex: 1; padding: 12px; border: 1px solid #555; background: #222; color: white; border-radius: 5px;">
+                                <input type="email" placeholder="Email" required style="flex: 1; padding: 12px; border: 1px solid #555; background: #222; color: white; border-radius: 5px;">
+                            </div>
+                            <input type="text" placeholder="Subject" required style="width: 100%; padding: 12px; border: 1px solid #555; background: #222; color: white; border-radius: 5px; margin-bottom: 15px;">
+                            <textarea placeholder="Message" required rows="4" style="width: 100%; padding: 12px; border: 1px solid #555; background: #222; color: white; border-radius: 5px; margin-bottom: 15px;"></textarea>
+                            <button type="submit" class="btn" style="width: 100%; padding: 12px; background: #C5A059; color: #000; border: none; border-radius: 5px;">Send Message</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <footer style="background: #111; color: #aaa; padding: 40px 0;">
+        <div class="container">
+            <div style="display: flex; flex-wrap: wrap; gap: 40px; margin-bottom: 30px;">
+                <div style="flex: 1; min-width: 250px;">
+                    <div style="color: #C5A059; font-size: 24px; font-weight: bold; margin-bottom: 15px;">Aaron Lim</div>
+                    <p style="margin-bottom: 15px;">
+                        A begeinner frontend developer currently working on website creation
+                    </p>
+                    <div>
+                        <a href="https://github.com/aaronlim" style="color: #aaa; margin-right: 15px; font-size: 20px;">🐱</a>
+                        <a href="https://linkedin.com/aaronlim" style="color: #aaa; margin-right: 15px; font-size: 20px;">💼</a>
+                        <a href="mailto:aaronlim@gmail.com" style="color: #aaa; font-size: 20px;">✉️</a>
+                    </div>
+                </div>
+
+                <div style="flex: 1; min-width: 150px;">
+                    <h4 style="color: white; margin-bottom: 15px;">Quick Links</h4>
+                    <div>
+                        <div><a href="#about" style="color: #aaa; margin-bottom: 10px; display: block;">About Me</a></div>
+                        <div><a href="#expertise" style="color: #aaa; margin-bottom: 10px; display: block;">Skills & Expertise</a></div>
+                        <div><a href="#projects" style="color: #aaa; margin-bottom: 10px; display: block;">My Projects</a></div>
+                        <div><a href="#experience" style="color: #aaa; margin-bottom: 10px; display: block;">My Journey</a></div>
+                        <div><a href="#contact" style="color: #aaa; margin-bottom: 10px; display: block;">Contact Me</a></div>
+                    </div>
+                </div>
+
+                <div style="flex: 1; min-width: 200px;">
+                    <h4 style="color: white; margin-bottom: 15px;">Get In Touch</h4>
+                    <div>
+                        <div style="margin-bottom: 10px;">
+                            <a href="mailto:aaronlim@gmail.com" style="color: #aaa;">
+                                aaronlim@gmail.com
+                            </a>
+                        </div>
+                        <div style="margin-bottom: 10px;">
+                            <a href="https://github.com/aaronlim" style="color: #aaa;">
+                                github.com/aaronlim
+                            </a>
+                        </div>
+                        <div>
+                            <a href="https://linkedin.com/aaronlim" style="color: #aaa;">
+                                linkedin.com/aaronlim
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="text-align: center; padding-top: 20px; border-top: 1px solid #333;">
+                <p style="color: #666; font-size: 14px;">
+                    &copy; 2025 Aaron Lim Developer Portfolio. Part of the Famasi Cues website family.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you for your message! I\'ll get back to you soon.');
+            this.reset();
+        });
+
+        document.querySelector('.theme-btn').addEventListener('click', function() {
+            const body = document.body;
+            if (body.style.backgroundColor === 'rgb(10, 10, 15)') {
+                body.style.backgroundColor = '';
+                body.style.color = '#333';
+                this.textContent = '🌙';
+            } else {
+                body.style.backgroundColor = '#0A0A0F';
+                body.style.color = '#fff';
+                this.textContent = '☀️';
+            }
+        });
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
