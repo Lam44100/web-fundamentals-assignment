@@ -57,8 +57,11 @@ body {
     font-family: var(--font-sans);
     line-height: 1.6;
     transition: background-color 0.3s, color 0.3s;
+    /* FIX: Remove padding here so backgrounds touch the edge */
     margin: 0;
-    padding: 0 1rem;
+    padding: 0;
+    overflow-x: hidden;
+    /* Prevent horizontal scrollbars */
 }
 
 a {
@@ -83,17 +86,15 @@ button {
 .container {
     max-width: 1200px;
     margin: 0 auto;
-    /* Default padding for larger screens */
-    padding: 0 3rem;
+    /* This padding ensures text doesn't stick to the edge on mobile */
+    padding: 0 1.5rem;
 }
 
-/* Add margin to main sections to prevent sticking to the edge */
 main,
-footer,
 nav,
-section {
-    margin-left: 0.5rem;
-    margin-right: 0.5rem;
+section,
+header {
+    width: 100%;
 }
 
 /* Responsive adjustment: Add more side margin/padding on small screens */
@@ -793,10 +794,13 @@ html.dark .progress-bar {
 
 /* --- CTA Section --- */
 .cta-section {
-    background-color: #09090b;
-    color: white;
+    /* UPDATED: Use theme variables so it switches between light/dark automatically */
+    background-color: var(--color-bg-alt);
+    color: var(--color-text-main);
     padding: 3rem 1.5rem;
     text-align: center;
+    /* Optional: Adds a subtle border to separate it if backgrounds are similar */
+    border-top: 1px solid var(--color-border);
 }
 
 .cta-buttons {
@@ -839,14 +843,53 @@ html.dark .progress-bar {
 }
 
 /* --- Footer --- */
+/* --- Footer & Contact Form --- */
 footer {
-    background-color: black;
-    color: #9ca3af;
-    padding: 2rem 0;
+    /* FIX: Use variable instead of hardcoded black for Light/Dark adaptation */
+    background-color: var(--color-bg-alt);
+    color: var(--color-text-muted);
+    padding: 4rem 0 2rem;
     text-align: center;
-    border-top: 1px solid #27272a;
-    font-size: 0.75rem;
+    border-top: 1px solid var(--color-border);
+    font-size: 0.875rem;
     font-weight: 500;
+}
+
+.contact-section-title {
+    color: var(--color-text-main);
+    margin-bottom: 1.5rem;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+
+.contact-input {
+    width: 100%;
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+    outline: none;
+    transition: all 0.3s ease;
+
+    /* Theme-aware colors */
+    background-color: var(--color-card-bg);
+    border: 1px solid var(--color-border);
+    color: var(--color-text-main);
+}
+
+.contact-input:focus {
+    border-color: var(--color-gold);
+    box-shadow: 0 0 0 2px rgba(197, 160, 89, 0.2);
+}
+
+.contact-textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+.form-group {
+    margin-bottom: 1rem;
 }
 
 /* --- Toast --- */
