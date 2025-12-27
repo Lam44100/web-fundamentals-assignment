@@ -43,9 +43,13 @@ html.dark {
     padding: 0;
 }
 
+
 html {
     scroll-behavior: smooth;
+    /* Add a small margin to prevent content from sticking to the edge */
+    box-sizing: border-box;
 }
+
 
 body {
     background-color: var(--color-bg);
@@ -53,6 +57,8 @@ body {
     font-family: var(--font-sans);
     line-height: 1.6;
     transition: background-color 0.3s, color 0.3s;
+    margin: 0;
+    padding: 0 1rem;
 }
 
 a {
@@ -73,11 +79,21 @@ button {
 }
 
 /* --- Utilities --- */
+
 .container {
     max-width: 1200px;
     margin: 0 auto;
     /* Default padding for larger screens */
-    padding: 0 2rem;
+    padding: 0 3rem;
+}
+
+/* Add margin to main sections to prevent sticking to the edge */
+main,
+footer,
+nav,
+section {
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
 }
 
 /* Responsive adjustment: Add more side margin/padding on small screens */
@@ -85,6 +101,14 @@ button {
     .container {
         /* Increased to prevent timeline dots from touching the edge */
         padding: 0 2.5rem;
+    }
+
+    main,
+    footer,
+    nav,
+    section {
+        margin-left: 0.25rem;
+        margin-right: 0.25rem;
     }
 }
 
@@ -270,6 +294,12 @@ header {
     color: white;
     box-shadow: var(--shadow-lg);
     flex-shrink: 0;
+    object-fit: cover;
+    object-position: top;
+    /* Ensures image fills the box without stretching */
+    display: block;
+    background-color: #09090b;
+    /* Fallback color */
 }
 
 .hero-text {
@@ -368,6 +398,13 @@ header {
 }
 
 @media (min-width: 768px) {
+
+    .profile-logo {
+        width: 12rem;
+        height: 12rem;
+        /* Removed font-size property as it is no longer needed */
+    }
+
     .hero-content {
         flex-direction: row;
         text-align: left;
@@ -709,12 +746,31 @@ html.dark .progress-bar {
 }
 
 /* --- References --- */
+.ref-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    /* Two equal columns */
+    gap: 1rem;
+    /* Space between cards */
+}
+
+/* Adjust for very small screens if needed, though usually side-by-side fits ok here */
+@media (max-width: 480px) {
+    .ref-grid {
+        grid-template-columns: 1fr;
+        /* Stack on very small mobile screens */
+    }
+}
+
 .ref-card {
     background-color: var(--color-card-bg);
     border: 1px solid var(--color-border);
     padding: 1rem;
     border-radius: 0.75rem;
-    margin-bottom: 1rem;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .ref-name {
@@ -732,6 +788,7 @@ html.dark .progress-bar {
     font-size: 0.75rem;
     color: var(--color-gold);
     margin-top: 0.25rem;
+
 }
 
 /* --- CTA Section --- */

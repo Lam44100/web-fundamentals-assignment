@@ -222,6 +222,18 @@ img {
     border-bottom: 1px solid #333;
 }
 
+/* ... existing code ... */
+.mobile-menu button {
+    background: black;
+    color: white;
+    padding: 12px 24px;
+    /* This padding might be different */
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+/* ... */
+
 /* Hero */
 .hero {
     height: 600px;
