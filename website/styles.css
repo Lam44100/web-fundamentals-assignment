@@ -965,6 +965,82 @@ html.dark .border-x {
     font-size: 0.8rem;
 }
 
+/* Footer 5-Column Layout */
+.footer-layout {
+    display: grid;
+    gap: 30px;
+    /* Custom fractions: Larger logo & form, standard middle columns */
+    grid-template-columns: 1.5fr 0.8fr 0.8fr 1fr 1.5fr;
+}
+
+/* Footer Form Styling */
+.footer-form input,
+.footer-form textarea {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 10px;
+    background-color: #222;
+    border: 1px solid #333;
+    color: #ccc;
+    font-family: inherit;
+    border-radius: 4px;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.footer-form input:focus,
+.footer-form textarea:focus {
+    border-color: var(--color-gold);
+}
+
+.footer-form button {
+    width: 100%;
+    padding: 12px;
+    background-color: var(--color-gold);
+    color: black;
+    font-weight: bold;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s;
+    border-radius: 4px;
+}
+
+.footer-form button:hover {
+    background-color: var(--color-gold-hover);
+}
+
+/* Responsive adjustments for the 5-column footer */
+@media (max-width: 1200px) {
+    .footer-layout {
+        grid-template-columns: repeat(2, 1fr);
+        /* Stack into 2 columns */
+    }
+
+    .footer-layout>div:first-child {
+        grid-column: span 2;
+        /* Logo takes full width on top */
+    }
+
+    .footer-layout>div:last-child {
+        grid-column: span 2;
+        /* Form takes full width at bottom */
+        margin-top: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .footer-layout {
+        grid-template-columns: 1fr;
+        /* Single column mobile */
+    }
+
+    .footer-layout>div:first-child,
+    .footer-layout>div:last-child {
+        grid-column: auto;
+    }
+}
+
 .bg-gold {
     background: var(--color-gold);
     color: black;

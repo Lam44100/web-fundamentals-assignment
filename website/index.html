@@ -100,9 +100,21 @@
 
             <div class="nav-icons">
                 <button onclick="toggleTheme()" aria-label="Toggle Theme">
-                    <svg id="theme-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    <svg id="theme-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                         stroke-width="2">
                         <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="theme-sun" class="hidden" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
                     </svg>
                 </button>
                 <button onclick="toggleSearch()" aria-label="Search">
@@ -448,7 +460,7 @@
     </main>
 
     <footer class="main-footer">
-        <div class="container grid-4">
+        <div class="container footer-layout">
             <div>
                 <a href="#" class="logo">Famasi<span>.</span></a>
                 <p>Bringing you the best in billiards technology and style since 1990.</p>
@@ -476,6 +488,17 @@
                     <li>(800) 555-0199</li>
                     <li>support@famasicues.com</li>
                 </ul>
+            </div>
+            <div>
+                <h4 style="visibility: hidden;">Message</h4>
+                <form
+                    onsubmit="event.preventDefault(); showToast('Message sent successfully!', 'Contact'); this.reset();"
+                    class="footer-form">
+                    <input type="text" placeholder="Name" required>
+                    <input type="email" placeholder="Email" required>
+                    <textarea placeholder="Message" required rows="3"></textarea>
+                    <button type="submit">Send</button>
+                </form>
             </div>
         </div>
         <div class="footer-bottom">

@@ -6,11 +6,20 @@ function toggleMenu() {
 
 // Dark Mode
 function toggleTheme() {
-    document.documentElement.classList.toggle('dark');
-    const icon = document.getElementById('theme-icon');
-    // Simple logic to switch SVG content could go here, 
-    // but for no-library simplicity, we just toggle the class.
-    // The CSS variables handle the color changes automatically.
+    const html = document.documentElement;
+    const moon = document.getElementById('theme-moon');
+    const sun = document.getElementById('theme-sun');
+
+    html.classList.toggle('dark');
+
+    // Toggle icons based on the presence of the 'dark' class
+    if (html.classList.contains('dark')) {
+        moon.classList.add('hidden');
+        sun.classList.remove('hidden');
+    } else {
+        moon.classList.remove('hidden');
+        sun.classList.add('hidden');
+    }
 }
 
 // Search Overlay
