@@ -12,7 +12,6 @@ function toggleTheme() {
 
     html.classList.toggle('dark');
 
-    // Toggle icons based on the presence of the 'dark' class
     if (html.classList.contains('dark')) {
         moon.classList.add('hidden');
         sun.classList.remove('hidden');
@@ -67,8 +66,7 @@ function switchAuthTab(tabName) {
 
 /* --- HELPER: Clear Errors --- */
 function clearErrors(formId) {
-    const form = document.getElementById(formId); // if you pass form ID
-    // Or clear all error texts generally if specific scoping isn't needed
+    const form = document.getElementById(formId);
     document.querySelectorAll('.error-text').forEach(el => el.innerText = '');
     document.querySelectorAll('input, textarea').forEach(el => el.classList.remove('invalid'));
 }
@@ -117,14 +115,9 @@ function handleLogin(event) {
         return;
     }
 
-    // Simulate specific wrong user
-    if (email === "error@famasi.com") {
-        showToast("User not found.", "Login Failed");
-        return;
-    }
 
     // SIMULATION: Success State
-    toggleAuth(); // Close modal
+    toggleAuth(); 
     showToast("Welcome back to Famasi!", "Login Successful");
     document.getElementById('login-email').value = '';
     document.getElementById('login-password').value = '';
@@ -162,10 +155,8 @@ function handleSignup(event) {
     }
 
     if (isValid) {
-        // Success State
         toggleAuth();
         showToast("Your account has been created.", "Account Created");
-        // Reset form
         document.getElementById('signup-name').value = '';
         document.getElementById('signup-email').value = '';
         document.getElementById('signup-password').value = '';

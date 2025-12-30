@@ -98,11 +98,10 @@ img {
     text-align: center;
 }
 
-/* UPDATED: Explicit Grid Columns (2 or 4 only) */
+/* Explicit Grid Columns (2 or 4 only) */
 .grid-4 {
     display: grid;
     gap: 30px;
-    /* Default: 4 items per row on large screens */
     grid-template-columns: repeat(4, 1fr);
 }
 
@@ -227,12 +226,10 @@ img {
     background: black;
     color: white;
     padding: 12px 24px;
-    /* This padding might be different */
     font-weight: bold;
     text-transform: uppercase;
 }
 
-/* ... */
 
 /* Hero */
 .hero {
@@ -288,7 +285,6 @@ img {
     transition: 0.3s;
     border-radius: 4px;
     display: inline-block;
-    /* Essential for <a> tags to look like buttons */
     text-align: center;
     cursor: pointer;
 }
@@ -784,10 +780,9 @@ html.dark .border-x {
     background-size: cover;
     background-position: center;
     opacity: 1;
-    /* Reset opacity for the image */
 }
 
-/* NEW: Gap between paragraph and button */
+/* Gap between paragraph and button */
 #custom p {
     margin-bottom: 30px;
 }
@@ -868,7 +863,6 @@ html.dark .border-x {
     box-shadow: var(--shadow-sm);
     border: 1px solid rgba(0, 0, 0, 0.05);
     transition: 0.3s;
-    /* FIX: Added Flexbox layout to fix overlaying issue */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -887,7 +881,6 @@ html.dark .border-x {
     height: 80px;
     border-radius: 50%;
     margin: 0 auto;
-    /* removed margin-bottom 15px because 'gap' handles it */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -969,7 +962,6 @@ html.dark .border-x {
 .footer-layout {
     display: grid;
     gap: 30px;
-    /* Custom fractions: Larger logo & form, standard middle columns */
     grid-template-columns: 1.5fr 0.8fr 0.8fr 1fr 1.5fr;
 }
 
@@ -1268,7 +1260,6 @@ html.dark .border-x {
         margin-top: 5px;
         display: block;
         min-height: 1.2em;
-        /* Prevents layout jump */
     }
 
     .input-group {
