@@ -5,14 +5,10 @@
     --color-gold-hover: #b08d4b;
     --color-bg: #ffffff;
     --color-bg-alt: #f4f4f4;
-    /* Gray-100/50 equivalent */
     --color-text-main: #111827;
-    /* Gray-900 */
     --color-text-muted: #4b5563;
-    /* Gray-600 */
     --color-border: #e5e7eb;
     --color-card-bg: #f9fafb;
-    /* Light card */
 
     --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     --font-serif: "Times New Roman", Times, serif;
@@ -24,15 +20,10 @@
 /* Dark Mode Palette */
 html.dark {
     --color-bg: #09090b;
-    /* Brand Dark */
     --color-bg-alt: #18181b;
-    /* Brand Card Dark */
     --color-text-main: #f3f4f6;
-    /* Gray-100 */
     --color-text-muted: #9ca3af;
-    /* Gray-400 */
     --color-border: #27272a;
-    /* Zinc-800 */
     --color-card-bg: #18181b;
 }
 
@@ -46,7 +37,6 @@ html.dark {
 
 html {
     scroll-behavior: smooth;
-    /* Add a small margin to prevent content from sticking to the edge */
     box-sizing: border-box;
 }
 
@@ -57,11 +47,9 @@ body {
     font-family: var(--font-sans);
     line-height: 1.6;
     transition: background-color 0.3s, color 0.3s;
-    /* FIX: Remove padding here so backgrounds touch the edge */
     margin: 0;
     padding: 0;
     overflow-x: hidden;
-    /* Prevent horizontal scrollbars */
 }
 
 a {
@@ -86,7 +74,6 @@ button {
 .container {
     max-width: 1200px;
     margin: 0 auto;
-    /* This padding ensures text doesn't stick to the edge on mobile */
     padding: 0 1.5rem;
 }
 
@@ -100,7 +87,6 @@ header {
 /* Responsive adjustment: Add more side margin/padding on small screens */
 @media (max-width: 768px) {
     .container {
-        /* Increased to prevent timeline dots from touching the edge */
         padding: 0 2.5rem;
     }
 
@@ -160,7 +146,6 @@ header {
 /* --- Navigation --- */
 nav {
     background-color: #09090b;
-    /* Always dark nav */
     color: white;
     position: sticky;
     top: 0;
@@ -297,10 +282,8 @@ header {
     flex-shrink: 0;
     object-fit: cover;
     object-position: top;
-    /* Ensures image fills the box without stretching */
     display: block;
     background-color: #09090b;
-    /* Fallback color */
 }
 
 .hero-text {
@@ -403,7 +386,6 @@ header {
     .profile-logo {
         width: 12rem;
         height: 12rem;
-        /* Removed font-size property as it is no longer needed */
     }
 
     .hero-content {
@@ -516,9 +498,7 @@ header {
     height: 1.2rem;
     border-radius: 50%;
     border: 4px solid var(--color-bg);
-    /* matches background to look like ring */
     box-shadow: 0 0 0 1px var(--color-border);
-    /* subtle outline if needed */
 }
 
 .dot-gold {
@@ -750,16 +730,13 @@ html.dark .progress-bar {
 .ref-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    /* Two equal columns */
     gap: 1rem;
-    /* Space between cards */
 }
 
 /* Adjust for very small screens if needed, though usually side-by-side fits ok here */
 @media (max-width: 480px) {
     .ref-grid {
         grid-template-columns: 1fr;
-        /* Stack on very small mobile screens */
     }
 }
 
@@ -794,12 +771,10 @@ html.dark .progress-bar {
 
 /* --- CTA Section --- */
 .cta-section {
-    /* UPDATED: Use theme variables so it switches between light/dark automatically */
     background-color: var(--color-bg-alt);
     color: var(--color-text-main);
     padding: 3rem 1.5rem;
     text-align: center;
-    /* Optional: Adds a subtle border to separate it if backgrounds are similar */
     border-top: 1px solid var(--color-border);
 }
 
@@ -845,7 +820,6 @@ html.dark .progress-bar {
 /* --- Footer --- */
 /* --- Footer & Contact Form --- */
 footer {
-    /* FIX: Use variable instead of hardcoded black for Light/Dark adaptation */
     background-color: var(--color-bg-alt);
     color: var(--color-text-muted);
     padding: 4rem 0 2rem;
@@ -905,7 +879,6 @@ footer {
     box-shadow: var(--shadow-lg);
     border: 1px solid #333;
     transform: translateY(150%);
-    /* Hidden state */
     transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     z-index: 1000;
 }
