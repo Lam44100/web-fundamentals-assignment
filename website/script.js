@@ -65,10 +65,145 @@ function switchAuthTab(tabName) {
     }
 }
 
-function handleAuth(event, title, message) {
+/* --- HELPER: Clear Errors --- */
+function clearErrors(formId) {
+    const form = document.getElementById(formId); // if you pass form ID
+    // Or clear all error texts generally if specific scoping isn't needed
+    document.querySelectorAll('.error-text').forEach(el => el.innerText = '');
+    document.querySelectorAll('input, textarea').forEach(el => el.classList.remove('invalid'));
+}
+
+/* --- HELPER: Validate Email Regex --- */
+function isValidEmail(email) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
+/* --- HELPER: Show Error --- */
+function showError(elementId, message) {
+    const errorEl = document.getElementById('error-' + elementId);
+    const inputEl = document.getElementById(elementId);
+    if (errorEl) errorEl.innerText = message;
+    if (inputEl) inputEl.classList.add('invalid');
+}
+
+/* --- AUTH SIMULATION: Login (Success & Failure States) --- */
+function handleLogin(event) {
     event.preventDefault();
-    toggleAuth();
-    showToast(message, title);
+    clearErrors();
+
+    const email = document.getElementById('login-email').value.trim();
+    const password = document.getElementById('login-password').value.trim();
+    let isValid = true;
+
+    // Validation Logic
+    if (!email) {
+        showError('login-email', 'Email is required.');
+        isValid = false;
+    } else if (!isValidEmail(email)) {
+        showError('login-email', 'Please enter a valid email.');
+        isValid = false;
+    }
+
+    if (!password) {
+        showError('login-password', 'Password is required.');
+        isValid = false;
+    }
+
+    if (!isValid) return;
+
+    // SIMULATION: Failure State (Mocking wrong credentials)
+    if (password.length < 6) {
+        showError('login-password', 'Password must be at least 6 characters.');
+        return;
+    }
+
+    // Simulate specific wrong user
+    if (email === "error@famasi.com") {
+        showToast("User not found.", "Login Failed");
+        return;
+    }
+
+    // SIMULATION: Success State
+    toggleAuth(); // Close modal
+    showToast("Welcome back to Famasi!", "Login Successful");
+    document.getElementById('login-email').value = '';
+    document.getElementById('login-password').value = '';
+}
+
+/* --- AUTH SIMULATION: Signup --- */
+function handleSignup(event) {
+    event.preventDefault();
+    clearErrors();
+
+    const name = document.getElementById('signup-name').value.trim();
+    const email = document.getElementById('signup-email').value.trim();
+    const password = document.getElementById('signup-password').value.trim();
+    let isValid = true;
+
+    if (!name) {
+        showError('signup-name', 'Full Name is required.');
+        isValid = false;
+    }
+
+    if (!email) {
+        showError('signup-email', 'Email is required.');
+        isValid = false;
+    } else if (!isValidEmail(email)) {
+        showError('signup-email', 'Please enter a valid email.');
+        isValid = false;
+    }
+
+    if (!password) {
+        showError('signup-password', 'Password is required.');
+        isValid = false;
+    } else if (password.length < 6) {
+        showError('signup-password', 'Password must be at least 6 chars.');
+        isValid = false;
+    }
+
+    if (isValid) {
+        // Success State
+        toggleAuth();
+        showToast("Your account has been created.", "Account Created");
+        // Reset form
+        document.getElementById('signup-name').value = '';
+        document.getElementById('signup-email').value = '';
+        document.getElementById('signup-password').value = '';
+    }
+}
+
+/* --- FOOTER CONTACT FORM VALIDATION --- */
+function handleContact(event) {
+    event.preventDefault();
+    clearErrors();
+
+    const name = document.getElementById('contact-name').value.trim();
+    const email = document.getElementById('contact-email').value.trim();
+    const message = document.getElementById('contact-message').value.trim();
+    let isValid = true;
+
+    if (!name) {
+        showError('contact-name', 'Name is required.');
+        isValid = false;
+    }
+
+    if (!email) {
+        showError('contact-email', 'Email is required.');
+        isValid = false;
+    } else if (!isValidEmail(email)) {
+        showError('contact-email', 'Enter a valid email address.');
+        isValid = false;
+    }
+
+    if (!message) {
+        showError('contact-message', 'Message cannot be empty.');
+        isValid = false;
+    }
+
+    if (isValid) {
+        showToast("Message sent successfully!", "Contact");
+        document.getElementById('footer-contact-form').reset();
+    }
 }
 
 // Cart Logic

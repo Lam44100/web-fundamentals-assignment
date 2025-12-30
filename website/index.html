@@ -27,12 +27,14 @@
             <div id="form-login" class="auth-form">
                 <h3>Welcome Back</h3>
                 <p>Enter your credentials to access your account.</p>
-                <form onsubmit="handleAuth(event, 'Login Successful', 'Welcome back to Famasi!')">
+                <form onsubmit="handleLogin(event)" novalidate>
                     <label for="login-email">Email Address</label>
                     <input type="email" id="login-email" required>
+                    <small id="error-login-email" class="error-text"></small>
 
                     <label for="login-password">Password</label>
                     <input type="password" id="login-password" required>
+                    <small id="error-login-password" class="error-text"></small>
 
                     <button type="submit" class="btn btn-primary full-width">Login</button>
                     <button type="button" class="btn-text">Forgot Password?</button>
@@ -42,15 +44,18 @@
             <div id="form-signup" class="auth-form hidden">
                 <h3>Join the Family</h3>
                 <p>Create an account to track orders and get rewards.</p>
-                <form onsubmit="handleAuth(event, 'Account Created', 'Thank you for registering!')">
+                <form onsubmit="handleSignup(event)" novalidate>
                     <label for="signup-name">Full Name</label>
                     <input type="text" id="signup-name" required>
+                    <small id="error-signup-name" class="error-text"></small>
 
                     <label for="signup-email">Email Address</label>
                     <input type="email" id="signup-email" required>
+                    <small id="error-signup-email" class="error-text"></small>
 
                     <label for="signup-password">Password</label>
                     <input type="password" id="signup-password" required>
+                    <small id="error-signup-password" class="error-text"></small>
 
                     <button type="submit" class="btn btn-primary full-width">Create Account</button>
                 </form>
@@ -506,12 +511,22 @@
             </div>
             <div>
                 <h4 style="visibility: hidden;">Message</h4>
-                <form
-                    onsubmit="event.preventDefault(); showToast('Message sent successfully!', 'Contact'); this.reset();"
-                    class="footer-form">
-                    <input type="text" placeholder="Name" required>
-                    <input type="email" placeholder="Email" required>
-                    <textarea placeholder="Message" required rows="3"></textarea>
+                <form id="footer-contact-form" onsubmit="handleContact(event)" class="footer-form" novalidate>
+                    <div class="input-group">
+                        <input type="text" id="contact-name" placeholder="Name" required>
+                        <small id="error-contact-name" class="error-text"></small>
+                    </div>
+
+                    <div class="input-group">
+                        <input type="email" id="contact-email" placeholder="Email" required>
+                        <small id="error-contact-email" class="error-text"></small>
+                    </div>
+
+                    <div class="input-group">
+                        <textarea id="contact-message" placeholder="Message" required rows="3"></textarea>
+                        <small id="error-contact-message" class="error-text"></small>
+                    </div>
+
                     <button type="submit">Send</button>
                 </form>
             </div>
