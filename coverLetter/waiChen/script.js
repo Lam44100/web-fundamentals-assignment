@@ -57,3 +57,45 @@ function showToast(message, title = "Skill Insight") {
 function closeToast() {
     document.getElementById('toast').classList.remove('visible');
 }
+
+/* --- VALIDATION LOGIC --- */
+function handleCVContact(event) {
+    event.preventDefault();
+
+    // Reset errors
+    document.getElementById('err-cv-name').innerText = '';
+    document.getElementById('err-cv-email').innerText = '';
+    document.getElementById('err-cv-message').innerText = '';
+
+    const name = document.getElementById('cv-name').value.trim();
+    const email = document.getElementById('cv-email').value.trim();
+    const message = document.getElementById('cv-message').value.trim();
+    let isValid = true;
+
+    // Validate Name
+    if (!name) {
+        document.getElementById('err-cv-name').innerText = "Name is required.";
+        isValid = false;
+    }
+
+    // Validate Email
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!email) {
+        document.getElementById('err-cv-email').innerText = "Email is required.";
+        isValid = false;
+    } else if (!emailRegex.test(email)) {
+        document.getElementById('err-cv-email').innerText = "Please enter a valid email address.";
+        isValid = false;
+    }
+
+    // Validate Message
+    if (!message) {
+        document.getElementById('err-cv-message').innerText = "Please write a message.";
+        isValid = false;
+    }
+
+    if (isValid) {
+        showToast('Thanks for reaching out! I will get back to you soon.', 'Message Sent');
+        document.getElementById('cv-contact-form').reset();
+    }
+}
